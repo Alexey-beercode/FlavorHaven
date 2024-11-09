@@ -4,5 +4,6 @@ namespace FlavorHaven.Domain.Abstractions.Repositories;
 
 public interface IPaymentRepository : IBaseRepository<Payment>
 {
-    Task<IEnumerable<Order>> GetByUserId(Guid id, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Payment>> GetByUserId(Guid id, CancellationToken cancellationToken = default);
+    void Delete(Payment payment);
 }

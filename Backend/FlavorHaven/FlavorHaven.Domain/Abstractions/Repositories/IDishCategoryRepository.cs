@@ -4,6 +4,6 @@ namespace FlavorHaven.Domain.Abstractions.Repositories;
 
 public interface IDishCategoryRepository : IBaseRepository<DishCategory>
 {
-    Task<Role> GetByNameAsync(string name, CancellationToken cancellationToken = default);
-    Task DeleteAsync(DishCategory dishCategory, CancellationToken cancellationToken = default);
+    Task<DishCategory> GetByNameAsync(string name, CancellationToken cancellationToken = default);
+    void Delete(DishCategory dishCategory);
 }
