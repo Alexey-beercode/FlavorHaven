@@ -16,4 +16,6 @@ public class Order : BaseEntity
     
     public Guid StatusId { get; set; }
     public OrderStatus Status { get; set; }
+    
+    public ICollection<OrderItems> OrderItems { get; set; }
 }
