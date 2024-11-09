@@ -1,11 +1,11 @@
-﻿using FlavorHaven.DAL.Configuration.Database;
-using FlavorHaven.DAL.Extensions;
-using FlavorHaven.Domain.Entities;
+﻿using FlavorHaven.Domain.Entities;
+using FlavorHaven.Infrastructure.Configuration.Database;
+using FlavorHaven.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace FlavorHaven.DAL.Configuration;
+namespace FlavorHaven.Infrastructure.Configuration;
 
-public class AppDbContext:DbContext
+public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {

@@ -1,13 +1,14 @@
-﻿using FlavorHaven.DAL.Configuration;
-using FlavorHaven.DAL.Repositories.Interfaces;
+﻿using FlavorHaven.Domain.Abstractions.Repositories;
 using FlavorHaven.Domain.Entities;
+using FlavorHaven.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace FlavorHaven.DAL.Repositories.Implementations;
+namespace FlavorHaven.Infrastructure.Repositories;
 
-public class RoleRepository:BaseRepository<Role>,IRoleRepository
+public class RoleRepository : BaseRepository<Role>, IRoleRepository
 {
     private readonly AppDbContext _dbContext;
+    
     public RoleRepository(AppDbContext dbContext) : base(dbContext)
     {
         _dbContext = dbContext;
@@ -20,33 +21,28 @@ public class RoleRepository:BaseRepository<Role>,IRoleRepository
                 .Any(userRole => userRole.UserId == userId && !userRole.IsDeleted && role.Id==userRole.RoleId))
             .ToListAsync(cancellationToken);
     }
-    
 
     public async Task<bool> SetRoleToUserAsync(Guid userId, Guid roleId, CancellationToken cancellationToken = default)
     {
-        var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
-        var role = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == roleId, cancellationToken);
-
-        if (user == null || role == null)
-        {
-            return false;
-        }
-
-        var isExists =
-            await _dbContext.UserRoles.AnyAsync(ur => ur.UserId == userId && ur.RoleId == roleId, cancellationToken);
+        var isExists = await _dbContext.UserRoles
+            .AnyAsync(ur => ur.UserId == userId && ur.RoleId == roleId, cancellationToken);
         if (isExists)
         {
             return false;
         }
 
         var userRole = new UserRole { UserId = userId, RoleId = roleId };
+        
         await _dbContext.UserRoles.AddAsync(userRole, cancellationToken);
+        
         return true;
     }
 
     public async Task<Role> GetByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Roles.AsNoTracking().FirstOrDefaultAsync(r => r.Name == name && !r.IsDeleted);
+        return await _dbContext.Roles
+            .AsNoTracking()
+            .FirstOrDefaultAsync(r => r.Name == name && !r.IsDeleted, cancellationToken);
     }
 
     public async Task<bool> RemoveRoleFromUserAsync(Guid userId, Guid roleId, CancellationToken cancellationToken = default)
@@ -67,7 +63,8 @@ public class RoleRepository:BaseRepository<Role>,IRoleRepository
     public async Task DeleteAsync(Role role, CancellationToken cancellationToken = default)
     {
         role.IsDeleted = true;
-        _dbSet.Update(role);
+        
+        _dbContext.Roles.Update(role);
         
         await _dbContext.UserRoles
             .Where(userRole => userRole.RoleId == role.Id && !userRole.IsDeleted)

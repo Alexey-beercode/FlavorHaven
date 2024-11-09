@@ -1,7 +1,8 @@
-﻿using FlavorHaven.DAL.Configuration;
-using FlavorHaven.DAL.Repositories.Interfaces;
+﻿using FlavorHaven.Domain.Abstractions.Repositories;
+using FlavorHaven.Domain.Abstractions.UnitOfWork;
+using FlavorHaven.Infrastructure.Configuration;
 
-namespace FlavorHaven.DAL.UnitOfWork;
+namespace FlavorHaven.Infrastructure.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork
 {
@@ -10,15 +11,15 @@ public class UnitOfWork : IUnitOfWork
     private readonly IRoleRepository _roleRepository;
     private bool _disposed;
 
+    public IUserRepository Users => _userRepository;
+    public IRoleRepository Roles => _roleRepository;
+    
     public UnitOfWork(AppDbContext dbContext, IUserRepository userRepository, IRoleRepository roleRepository)
     {
         _dbContext = dbContext;
         _userRepository = userRepository;
         _roleRepository = roleRepository;
     }
-
-    public IUserRepository Users => _userRepository;
-    public IRoleRepository Roles => _roleRepository;
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

@@ -1,8 +1,8 @@
 ﻿using FlavorHaven.Domain.Entities;
 
-namespace FlavorHaven.DAL.Repositories.Interfaces;
+namespace FlavorHaven.Domain.Abstractions.Repositories;
 
-public interface IRoleRepository:IBaseRepository<Role>
+public interface IRoleRepository : IBaseRepository<Role>
 {
     Task<IEnumerable<Role>> GetRolesByUserIdAsync(Guid userId, CancellationToken cancellationToken);
     Task<bool> RemoveRoleFromUserAsync(Guid userId, Guid roleId, CancellationToken cancellationToken = default);

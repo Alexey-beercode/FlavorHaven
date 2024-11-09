@@ -2,7 +2,7 @@
 
 namespace FlavorHaven.Domain.Entities;
 
-public class OrderStatus:BaseEntity
+public class OrderStatus : BaseEntity
 {
     public string Name { get; set; }
 }

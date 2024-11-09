@@ -1,7 +1,7 @@
 using FlavorHaven.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FlavorHaven.DAL.Extensions;
+namespace FlavorHaven.Infrastructure.Extensions;
 
 public static class ModelBuilderExtension
 {

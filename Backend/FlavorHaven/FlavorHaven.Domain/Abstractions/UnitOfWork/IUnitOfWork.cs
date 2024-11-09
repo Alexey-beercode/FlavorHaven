@@ -1,8 +1,8 @@
-﻿using FlavorHaven.DAL.Repositories.Interfaces;
+﻿using FlavorHaven.Domain.Abstractions.Repositories;
 
-namespace FlavorHaven.DAL.UnitOfWork;
+namespace FlavorHaven.Domain.Abstractions.UnitOfWork;
 
-public interface IUnitOfWork:IDisposable
+public interface IUnitOfWork : IDisposable
 {
     Task<int> SaveChangesAsync(CancellationToken cancellationToken=default);
     IUserRepository Users { get; }
