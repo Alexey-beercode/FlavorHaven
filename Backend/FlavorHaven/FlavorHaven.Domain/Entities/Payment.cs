@@ -8,5 +8,5 @@ public class Payment : BaseEntity
     public bool IsCanceled { get; set; }
     
     public Guid UserId { get; set; }
-    public User User { get; set; }
+    public Guid OrderId { get; set; }
 }

@@ -22,6 +22,12 @@ public class PaymentRepository : BaseRepository<Payment>, IPaymentRepository
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<Payment> GetByOrderId(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Payments
+            .FirstOrDefaultAsync(payment => payment.OrderId == id && !payment.IsDeleted, cancellationToken);
+    }
+
     public void Delete(Payment payment)
     {
         payment.IsCanceled = true;
