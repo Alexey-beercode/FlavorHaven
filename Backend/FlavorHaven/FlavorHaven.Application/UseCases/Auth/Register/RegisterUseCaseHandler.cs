@@ -35,7 +35,7 @@ public class RegisterUseCaseHandler : IRequestHandler<RegisterUseCase, TokensDTO
             throw new AuthorizationException("User with this login already exists.");
         }
 
-        user = _mapper.Map<User>(request);
+        user = _mapper.Map<Domain.Entities.User>(request);
         user.PasswordHash = _passwordProvider.HashPassword(request.Password);
         
         await _unitOfWork.Users.CreateAsync(user, cancellationToken);
@@ -54,7 +54,7 @@ public class RegisterUseCaseHandler : IRequestHandler<RegisterUseCase, TokensDTO
         return tokenResponse;
     }
     
-    private async Task<TokensDTO> GenerateTokensAsync(User user, CancellationToken cancellationToken = default)
+    private async Task<TokensDTO> GenerateTokensAsync(Domain.Entities.User user, CancellationToken cancellationToken = default)
     {
         var accessToken = await _tokenProvider.GenerateAccessTokenAsync(user, cancellationToken);
 

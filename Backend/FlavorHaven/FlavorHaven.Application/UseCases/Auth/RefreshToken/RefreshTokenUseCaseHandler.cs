@@ -35,7 +35,7 @@ public class RefreshTokenUseCaseHandler : IRequestHandler<RefreshTokenUseCase, T
         return tokenResponse;
     }
     
-    private async Task<TokensDTO> GenerateTokensAsync(User user, CancellationToken cancellationToken = default)
+    private async Task<TokensDTO> GenerateTokensAsync(Domain.Entities.User user, CancellationToken cancellationToken = default)
     {
         var accessToken = await _tokenProvider.GenerateAccessTokenAsync(user, cancellationToken);
         

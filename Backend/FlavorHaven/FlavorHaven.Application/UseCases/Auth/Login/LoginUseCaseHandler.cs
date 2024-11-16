@@ -3,7 +3,6 @@ using FlavorHaven.Application.Exceptions;
 using FlavorHaven.Application.Models.DTOs;
 using FlavorHaven.Application.Providers.Interfaces;
 using FlavorHaven.Domain.Abstractions.UnitOfWork;
-using FlavorHaven.Domain.Entities;
 using MediatR;
 
 namespace FlavorHaven.Application.UseCases.Auth.Login;
@@ -43,7 +42,7 @@ public class LoginUseCaseHandler : IRequestHandler<LoginUseCase, TokensDTO>
         return tokenResponse;
     }
     
-    private async Task<TokensDTO> GenerateTokensAsync(User user, CancellationToken cancellationToken = default)
+    private async Task<TokensDTO> GenerateTokensAsync(Domain.Entities.User user, CancellationToken cancellationToken = default)
     {
         var accessToken = await _tokenProvider.GenerateAccessTokenAsync(user, cancellationToken);
 
