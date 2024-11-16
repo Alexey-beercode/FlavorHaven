@@ -29,4 +29,9 @@ public class CartRepository : BaseRepository<Cart>, ICartRepository
         
         _dbContext.Cart.RemoveRange(itemsToDelete);
     }
+
+    public void Delete(Cart cart)
+    {
+        _dbContext.Cart.Remove(cart);
+    }
 }
