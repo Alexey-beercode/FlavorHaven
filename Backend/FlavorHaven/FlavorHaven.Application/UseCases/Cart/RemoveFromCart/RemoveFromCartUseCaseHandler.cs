@@ -9,12 +9,10 @@ namespace FlavorHaven.Application.UseCases.Cart.RemoveFromCart;
 public class RemoveFromCartUseCaseHandler : IRequestHandler<RemoveFromCartUseCase>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
 
-    public RemoveFromCartUseCaseHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public RemoveFromCartUseCaseHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
 
     public async Task Handle(RemoveFromCartUseCase request, CancellationToken cancellationToken)

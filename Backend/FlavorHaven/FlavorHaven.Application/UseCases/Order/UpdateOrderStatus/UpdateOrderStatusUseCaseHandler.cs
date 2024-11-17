@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using FlavorHaven.Application.Exceptions;
-using FlavorHaven.Application.Models.DTOs;
+﻿using FlavorHaven.Application.Exceptions;
 using FlavorHaven.Domain.Abstractions.UnitOfWork;
 using MediatR;
 

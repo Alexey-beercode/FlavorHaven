@@ -9,12 +9,10 @@ namespace FlavorHaven.Application.UseCases.Cart.AddToCart;
 public class AddToCartUseCaseHandler : IRequestHandler<AddToCartUseCase>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
 
-    public AddToCartUseCaseHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public AddToCartUseCaseHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _mapper = mapper;
     }
 
     public async Task Handle(AddToCartUseCase request, CancellationToken cancellationToken)
