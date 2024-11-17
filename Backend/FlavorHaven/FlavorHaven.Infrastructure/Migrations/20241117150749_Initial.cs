@@ -40,6 +40,22 @@ namespace FlavorHaven.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    IsCanceled = table.Column<bool>(type: "boolean", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -140,27 +156,6 @@ namespace FlavorHaven.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    IsCanceled = table.Column<bool>(type: "boolean", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Payments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Cart",
                 columns: table => new
                 {
@@ -242,23 +237,37 @@ namespace FlavorHaven.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "OrderStatuses",
+                columns: new[] { "Id", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("28ab13cb-c0d4-458f-8e04-6483bc3a9899"), false, "Ready" },
+                    { new Guid("5415a515-ecd7-4f38-8499-1ca7f0729e10"), false, "Cancelled" },
+                    { new Guid("58eb57d0-4030-4d8c-94e5-220708af6236"), false, "Processing" },
+                    { new Guid("6a312435-57cf-46f8-b329-ea9be8f04351"), false, "Created" },
+                    { new Guid("8f4d6034-ece7-42af-bc07-c01fd1f14143"), false, "Cooking" },
+                    { new Guid("e14e0f0d-03ae-4fdb-b53d-f649c215542f"), false, "Completed" },
+                    { new Guid("ffefb033-b691-40d6-8571-eef74d996894"), false, "Delivering" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "Id", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("4fb4100a-311a-4ee4-8f27-5151d3f80ab1"), false, "Resident" },
-                    { new Guid("583e1840-ba88-418d-ae9e-4ce7571f0946"), false, "Admin" }
+                    { new Guid("583e1840-ba88-418d-ae9e-4ce7571f0946"), false, "Admin" },
+                    { new Guid("7648aed1-b4bd-4836-9b79-7a597fdb8cc2"), false, "Resident" }
                 });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "IsDeleted", "RoleId", "UserId" },
-                values: new object[] { new Guid("27f2618b-316c-4723-86db-d6edb3b76977"), false, new Guid("583e1840-ba88-418d-ae9e-4ce7571f0946"), new Guid("bd65e7bd-e25a-4935-81d1-05093b5f48c0") });
+                values: new object[] { new Guid("dcd0ce9d-71ba-4e0f-b229-317b0498ae74"), false, new Guid("583e1840-ba88-418d-ae9e-4ce7571f0946"), new Guid("bd65e7bd-e25a-4935-81d1-05093b5f48c0") });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Balance", "Email", "IsDeleted", "PasswordHash", "RefreshToken", "RefreshTokenExpiryTime", "UserName" },
-                values: new object[] { new Guid("bd65e7bd-e25a-4935-81d1-05093b5f48c0"), 0m, "admin@gmail.com", false, "$2a$11$Loqc4DDy.y9PxugCz5USJewKOqN.WRXAwmHEYUV3js7NmWcEVj.EO", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Admin" });
+                values: new object[] { new Guid("bd65e7bd-e25a-4935-81d1-05093b5f48c0"), 0m, "admin@gmail.com", false, "$2a$11$LQ9qLAzQcDXXXaC7pNVJ3.41k/JlwERIy0RNxBpPSS1aUUVqKPEB2", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cart_DishId",
@@ -293,11 +302,6 @@ namespace FlavorHaven.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
                 table: "Orders",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Payments_UserId",
-                table: "Payments",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(

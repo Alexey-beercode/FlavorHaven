@@ -189,6 +189,50 @@ namespace FlavorHaven.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OrderStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6a312435-57cf-46f8-b329-ea9be8f04351"),
+                            IsDeleted = false,
+                            Name = "Created"
+                        },
+                        new
+                        {
+                            Id = new Guid("58eb57d0-4030-4d8c-94e5-220708af6236"),
+                            IsDeleted = false,
+                            Name = "Processing"
+                        },
+                        new
+                        {
+                            Id = new Guid("8f4d6034-ece7-42af-bc07-c01fd1f14143"),
+                            IsDeleted = false,
+                            Name = "Cooking"
+                        },
+                        new
+                        {
+                            Id = new Guid("28ab13cb-c0d4-458f-8e04-6483bc3a9899"),
+                            IsDeleted = false,
+                            Name = "Ready"
+                        },
+                        new
+                        {
+                            Id = new Guid("ffefb033-b691-40d6-8571-eef74d996894"),
+                            IsDeleted = false,
+                            Name = "Delivering"
+                        },
+                        new
+                        {
+                            Id = new Guid("e14e0f0d-03ae-4fdb-b53d-f649c215542f"),
+                            IsDeleted = false,
+                            Name = "Completed"
+                        },
+                        new
+                        {
+                            Id = new Guid("5415a515-ecd7-4f38-8499-1ca7f0729e10"),
+                            IsDeleted = false,
+                            Name = "Cancelled"
+                        });
                 });
 
             modelBuilder.Entity("FlavorHaven.Domain.Entities.Payment", b =>
@@ -275,7 +319,7 @@ namespace FlavorHaven.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("54fb8379-499e-42ab-bf61-66e8f44d9e18"),
+                            Id = new Guid("7648aed1-b4bd-4836-9b79-7a597fdb8cc2"),
                             IsDeleted = false,
                             Name = "Resident"
                         });
@@ -329,7 +373,7 @@ namespace FlavorHaven.Infrastructure.Migrations
                             Balance = 0m,
                             Email = "admin@gmail.com",
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$.vqV86CrwqydyHQWh0rxZeVyNIdWr0TvUuxfGelqIjnNKboXu28Oe",
+                            PasswordHash = "$2a$11$LQ9qLAzQcDXXXaC7pNVJ3.41k/JlwERIy0RNxBpPSS1aUUVqKPEB2",
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "Admin"
@@ -361,7 +405,7 @@ namespace FlavorHaven.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ac6af44d-a0ce-4d0c-a4f0-8c67c2cb4c18"),
+                            Id = new Guid("dcd0ce9d-71ba-4e0f-b229-317b0498ae74"),
                             IsDeleted = false,
                             RoleId = new Guid("583e1840-ba88-418d-ae9e-4ce7571f0946"),
                             UserId = new Guid("bd65e7bd-e25a-4935-81d1-05093b5f48c0")
