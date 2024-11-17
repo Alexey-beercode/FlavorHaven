@@ -1,7 +1,10 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 using System.Text.Json.Serialization;
 using FlavorHaven.Application;
 using FlavorHaven.Infrastructure;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
@@ -19,10 +22,10 @@ public static class WebApplicationBuilderExtension
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
-        /*builder.Services.AddFluentValidationAutoValidation();
-        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());*/
+        builder.Services.AddFluentValidationAutoValidation();
+        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-        //builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         builder.Services.AddInfrastructureServices(builder.Configuration);
         builder.Services.AddApplicationServices(builder.Configuration);
