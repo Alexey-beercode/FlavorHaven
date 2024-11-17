@@ -43,4 +43,52 @@ public static class ModelBuilderExtension
             UserId = adminId
         });
     }
+    
+    public static void SeedOrderStatuses(this ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<OrderStatus>().HasData(
+            new OrderStatus 
+            { 
+                Id = Guid.NewGuid(),
+                IsDeleted = false,
+                Name = "Created"
+            },
+            new OrderStatus
+            {
+                Id = Guid.NewGuid(),
+                IsDeleted = false, 
+                Name = "Processing"
+            },
+            new OrderStatus
+            {
+                Id = Guid.NewGuid(),
+                IsDeleted = false,
+                Name = "Cooking"
+            },
+            new OrderStatus
+            {
+                Id = Guid.NewGuid(),
+                IsDeleted = false,
+                Name = "Ready"
+            },
+            new OrderStatus
+            {
+                Id = Guid.NewGuid(),
+                IsDeleted = false,
+                Name = "Delivering"
+            },
+            new OrderStatus
+            {
+                Id = Guid.NewGuid(),
+                IsDeleted = false,
+                Name = "Completed"
+            },
+            new OrderStatus
+            {
+                Id = Guid.NewGuid(),
+                IsDeleted = false,
+                Name = "Cancelled"
+            }
+        );
+    }
 }
