@@ -20,6 +20,7 @@ public class OrderRepository : BaseRepository<Order>, IOrderRepository
             .Where(order => order.UserId == id && !order.IsDeleted)
             .Include(order => order.Status)
             .Include(order => order.OrderItems)
+                .ThenInclude(item => item.Dish)
             .ToListAsync(cancellationToken);
     }
 
@@ -29,6 +30,7 @@ public class OrderRepository : BaseRepository<Order>, IOrderRepository
             .Where(order => order.StatusId == id && !order.IsDeleted)
             .Include(order => order.Status)
             .Include(order => order.OrderItems)
+                .ThenInclude(item => item.Dish)
             .ToListAsync(cancellationToken);
     }
 
