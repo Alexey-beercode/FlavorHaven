@@ -1,6 +1,6 @@
 ﻿namespace FlavorHaven.DTOs.Order;
 
-public class UpdateOrderStatusRequestDTO
+public class UpdateOrderRequestDTO
 {
     public Guid OrderId { get; set; }
     public Guid StatusId { get; set; }
