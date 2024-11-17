@@ -1,13 +1,13 @@
+using FlavorHaven.Extensions;
 using FlavorHaven.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        
-string? dataBaseConnection = builder.Configuration.GetConnectionString("PostrgeSql");
-builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseNpgsql(dataBaseConnection));
+builder.AddServices()
+    .ConfigureJWT()
+    .AddAuthentication()
+    .AddSwaggerDocumentation();
 
 var app = builder.Build();
 
