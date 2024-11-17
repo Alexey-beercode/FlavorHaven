@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using FlavorHaven.Domain.Abstractions.Repositories;
 using FlavorHaven.Domain.Entities;
+using FlavorHaven.Domain.Enums;
 using FlavorHaven.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,16 +16,36 @@ public class DishRepository : BaseRepository<Dish>, IDishRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<Dish>> Where(Expression<Func<Dish, bool>> filters, int pageNumber = 0, int pageSize = int.MaxValue,
+    public async Task<IEnumerable<Dish>> Where(
+        Expression<Func<Dish, bool>> filters, 
+        SortingParameters? sorting = null,
+        int pageNumber = 0, 
+        int pageSize = int.MaxValue,
         CancellationToken cancellationToken = default)
     {
-        var query = _dbContext.Dishes.AsQueryable();
+        var query = _dbContext.Dishes
+            .Include(d => d.Category)
+            .Where(filters);
         
-        query = query.Where(filters);
+        query = sorting switch
+        {
+            SortingParameters.PriceDecrease => query.OrderByDescending(d => d.Price),
+            SortingParameters.PriceIncrease => query.OrderBy(d => d.Price),
+            _ => query
+        };
         
         query = query.Skip(pageNumber * pageSize).Take(pageSize);
 
         return await query.ToListAsync(cancellationToken);
+    }
+
+    public async Task<int> Count(
+        Expression<Func<Dish, bool>> filters,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Dishes
+            .Where(filters)
+            .CountAsync(cancellationToken);
     }
 
     public void Delete(Dish dish)
