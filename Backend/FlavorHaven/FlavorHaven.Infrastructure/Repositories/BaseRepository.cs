@@ -8,13 +8,11 @@ namespace FlavorHaven.Infrastructure.Repositories;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
-    private readonly AppDbContext _dbContext;
     private readonly DbSet<T> _dbSet;
-    
-    public BaseRepository(AppDbContext dbContext)
+
+    protected BaseRepository(AppDbContext dbContext)
     {
-        _dbContext = dbContext;
-        _dbSet = _dbContext.Set<T>();
+        _dbSet = dbContext.Set<T>();
     }
 
     public async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includeProperties)

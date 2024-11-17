@@ -2,10 +2,8 @@
 using FlavorHaven.Application.Models.Options;
 using FlavorHaven.Application.Providers.Implementation;
 using FlavorHaven.Application.Providers.Interfaces;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace FlavorHaven.Application;
 
 public static class DependencyInjection

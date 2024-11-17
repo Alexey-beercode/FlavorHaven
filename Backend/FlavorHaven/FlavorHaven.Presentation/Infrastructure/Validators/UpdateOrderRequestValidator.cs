@@ -7,9 +7,6 @@ public class UpdateOrderRequestValidator : AbstractValidator<UpdateOrderRequestD
 {
     public UpdateOrderRequestValidator()
     {
-        RuleFor(x => x.OrderId)
-            .NotEmpty();
-
         RuleFor(x => x.StatusId)
             .NotEmpty();
     }

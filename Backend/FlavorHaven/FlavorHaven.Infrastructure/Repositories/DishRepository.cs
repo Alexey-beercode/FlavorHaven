@@ -34,7 +34,7 @@ public class DishRepository : BaseRepository<Dish>, IDishRepository
             _ => query
         };
         
-        query = query.Skip(pageNumber * pageSize).Take(pageSize);
+        query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 
         return await query.ToListAsync(cancellationToken);
     }

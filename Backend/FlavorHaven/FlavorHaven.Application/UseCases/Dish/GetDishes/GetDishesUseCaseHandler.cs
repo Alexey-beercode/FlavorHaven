@@ -36,7 +36,7 @@ public class GetDishesUseCaseHandler : IRequestHandler<GetDishesUseCase, Paginat
             filter = filter.And(dish => dish.Name.ToLower().Contains(searchTerm));
         }
 
-        var pageNumber = request.PageNumber ?? 0;
+        var pageNumber = request.PageNumber ?? 1;
         var pageSize = request.PageSize ?? int.MaxValue;
 
         var totalCount = await _unitOfWork.Dishes.Count(filter, cancellationToken);

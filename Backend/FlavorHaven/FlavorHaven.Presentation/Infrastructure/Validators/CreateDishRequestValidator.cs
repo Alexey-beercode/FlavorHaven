@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace FlavorHaven.Infrastructure.Validators;
 
-public class CreateDishRequestValidator : AbstractValidator<CreateDishRequestDTO>
+public class CreateDishRequestValidator : AbstractValidator<DishRequestDTO>
 {
     public CreateDishRequestValidator()
     {

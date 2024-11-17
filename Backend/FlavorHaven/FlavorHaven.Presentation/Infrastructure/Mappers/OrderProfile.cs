@@ -11,6 +11,5 @@ public class OrderProfile : Profile
     {
         CreateMap<CreateOrderRequestDTO, CreateOrderFromCartUseCase>();
         CreateMap<UpdateOrderRequestDTO, UpdateOrderStatusUseCase>();
-
     }
 }

@@ -13,11 +13,8 @@ public class DishProfile : Profile
 {
     public DishProfile()
     {
-        CreateMap<CreateDishRequestDTO, CreateDishUseCase>();
-        CreateMap<UpdateDishRequestDTO, UpdateDishUseCase>();
+        CreateMap<DishRequestDTO, CreateDishUseCase>();
+        CreateMap<DishRequestDTO, UpdateDishUseCase>();
         CreateMap<GetDishesRequestDTO, GetDishesUseCase>();
-
-        CreateMap<DishCategoryRequestDTO, CreateDishCategoryUseCase>();
-        CreateMap<DishCategoryRequestDTO, UpdateDishCategoryUseCase>();
     }
 }

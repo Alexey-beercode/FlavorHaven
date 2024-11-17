@@ -7,14 +7,14 @@ namespace FlavorHaven.Infrastructure.Configuration;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Cart> Cart { get; }
-    public DbSet<Dish> Dishes { get; }
-    public DbSet<DishCategory> DishCategories { get; }
-    public DbSet<Order> Orders { get; }
-    public DbSet<OrderItems> OrderItems { get; }
-    public DbSet<OrderStatus> OrderStatuses { get; }
-    public DbSet<Payment> Payments { get; }
-    public DbSet<Review> Reviews { get; }
+    public DbSet<Cart> Cart { get; set; }
+    public DbSet<Dish> Dishes { get; set;}
+    public DbSet<DishCategory> DishCategories { get; set;}
+    public DbSet<Order> Orders { get; set;}
+    public DbSet<OrderItems> OrderItems { get; set;}
+    public DbSet<OrderStatus> OrderStatuses { get; set;}
+    public DbSet<Payment> Payments { get; set;}
+    public DbSet<Review> Reviews { get; set;}
     public DbSet<Role> Roles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }

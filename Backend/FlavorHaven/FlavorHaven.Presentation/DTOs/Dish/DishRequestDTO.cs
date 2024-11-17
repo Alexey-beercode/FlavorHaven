@@ -1,6 +1,6 @@
 ﻿namespace FlavorHaven.DTOs.Dish;
 
-public class CreateDishRequestDTO
+public class DishRequestDTO
 {
     public string Name { get; set; }
     public string Description { get; set; }
