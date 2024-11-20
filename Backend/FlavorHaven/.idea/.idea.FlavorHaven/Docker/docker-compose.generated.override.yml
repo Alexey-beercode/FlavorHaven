@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.8"
+services:
+  flavorhaven.presentation:
+    build:
+      context: "D:\\Programming\\BusinessProject\\FlavorHaven\\Backend\\FlavorHaven"
+      dockerfile: "FlavorHaven.Presentation/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/FlavorHaven.Presentation.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "flavorhaven.presentation:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\Kissel\\.nuget\\packages:/home/app/.nuget/packages"
+    - "D:\\Programming\\BusinessProject\\FlavorHaven\\Backend\\FlavorHaven\\FlavorHaven.Presentation:/app:rw"
+    - "D:\\Programming\\BusinessProject\\FlavorHaven\\Backend\\FlavorHaven:/src:rw"
+    working_dir: "/app"

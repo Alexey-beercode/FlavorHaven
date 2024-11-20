@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>FlavorHaven</RootNamespace>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,6 +28,12 @@
     <ItemGroup>
       <ProjectReference Include="..\FlavorHaven.Application\FlavorHaven.Application.csproj" />
       <ProjectReference Include="..\FlavorHaven.Infrastructure\FlavorHaven.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
