@@ -31,18 +31,4 @@ public class UserController : ControllerBase
         
         return NoContent();
     }
-
-    [HttpPut("update-balance/{id}")]
-    public async Task<IActionResult> UpdateUserBalance(Guid id, [FromBody] UpdateUserBalanceRequestDTO request, CancellationToken cancellationToken = default)
-    {
-        var command = new UpdateUserBalanceUseCase 
-        { 
-            Id = id,
-            Count = request.Count
-        };
-        
-        await _mediator.Send(command, cancellationToken);
-        
-        return NoContent();
-    }
 }
