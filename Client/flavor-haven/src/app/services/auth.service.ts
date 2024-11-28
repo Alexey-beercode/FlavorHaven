@@ -61,4 +61,8 @@ export class AuthService {
   revoke(userId: string): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}${this.authUrls.revoke}/${userId}`, {});
   }
+
+  logout():void{
+    this.tokenService.clearTokens();
+  }
 }

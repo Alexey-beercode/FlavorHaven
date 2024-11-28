@@ -1,1 +1,9 @@
-<p>search works!</p>
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Поиск по названию..."
+    [(ngModel)]="searchName"
+    (input)="onSearchChange()"
+    class="search-input"
+  />
+</div>

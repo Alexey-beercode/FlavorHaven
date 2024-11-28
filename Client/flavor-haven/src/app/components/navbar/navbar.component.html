@@ -1,1 +1,25 @@
-<p>navbar works!</p>
+<nav class="navbar" [class.collapsed]="isCollapsed">
+  <div class="navbar-content">
+    <div class="navbar-logo">FlavorHaven</div>
+    <ul class="navbar-links">
+      <li>
+        <a routerLink="/">
+          <fa-icon [icon]="faHome"></fa-icon>
+          <span class="nav-label">Главная</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/cart">
+          <fa-icon [icon]="faShoppingCart"></fa-icon>
+          <span class="nav-label">Корзина</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/profile">
+          <fa-icon [icon]="faUser"></fa-icon>
+          <span class="nav-label">Профиль</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -19,9 +19,10 @@ public static class WebApplicationExtension
     public static WebApplication AddApplicationMiddleware(this WebApplication app)
     {
         app.UseCors(builder => builder
-            .AllowAnyOrigin()
+            .WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
-            .AllowAnyHeader());
+            .AllowAnyHeader()
+            .AllowCredentials());
             
         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
         

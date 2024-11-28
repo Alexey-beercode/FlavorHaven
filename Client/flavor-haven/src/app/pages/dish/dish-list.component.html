@@ -1,0 +1,21 @@
+<div class="dish-list-container">
+  <div class="dish-list">
+    <!-- Список блюд -->
+    <div *ngFor="let dish of dishes" class="dish-item">
+      <img [src]="dish.imageUrl" [alt]="dish.name" class="dish-image" />
+      <div class="dish-info">
+        <h3 class="dish-name">{{ dish.name }}</h3>
+        <p class="dish-description">{{ dish.description }}</p>
+        <p class="dish-price">{{ dish.price | currency }}</p>
+        <app-add-to-cart [dishId]="dish.id"></app-add-to-cart>
+      </div>
+    </div>
+  </div>
+
+  <!-- Пагинация -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Назад</button>
+    <span>Страница {{ currentPage }} из {{ totalPageCount }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPageCount">Вперёд</button>
+  </div>
+</div>

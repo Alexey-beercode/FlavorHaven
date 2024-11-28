@@ -1,1 +1,14 @@
-<p>filter works!</p>
+<div class="filter-container">
+  <label for="category-select">Фильтр по категории:</label>
+  <select
+    id="category-select"
+    class="category-select"
+    [(ngModel)]="selectedCategoryId"
+    (change)="onCategoryChange()"
+  >
+    <option value="">Все категории</option>
+    <option *ngFor="let category of categories" [value]="category.id">
+      {{ category.name }}
+    </option>
+  </select>
+</div>

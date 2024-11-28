@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-error-message',
-  imports: [],
   templateUrl: './error-message.component.html',
-  styleUrl: './error-message.component.css'
+  styleUrls: ['./error-message.component.css'],
+  standalone: true,
 })
 export class ErrorMessageComponent {
-
+  @Input() message: string = 'An unexpected error occurred.';
 }

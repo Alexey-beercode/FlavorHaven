@@ -1,9 +1,7 @@
-import { SortingParameters } from '../dish/sorting-parameters.dto';
-
-export interface GetDishesRequestDTO {
-  categoryId?: string;
-  searchName?: string;
-  sorting?: SortingParameters;
-  pageNumber?: number;
-  pageSize?: number;
+export interface PaginatedResult<T> {
+  collection: T[];
+  currentPage: number;
+  pageSize: number;
+  totalPageCount: number;
+  totalItemCount: number;
 }

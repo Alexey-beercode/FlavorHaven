@@ -1,1 +1,32 @@
-<p>sort works!</p>
+<div class="sort-container">
+  <label>
+    <input
+      type="radio"
+      name="sort"
+      [value]="SortingParameters.None"
+      [(ngModel)]="sorting"
+      (change)="onSortingChange()"
+    />
+    Без сортировки
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="sort"
+      [value]="SortingParameters.PriceIncrease"
+      [(ngModel)]="sorting"
+      (change)="onSortingChange()"
+    />
+    Цена по возрастанию
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="sort"
+      [value]="SortingParameters.PriceDecrease"
+      [(ngModel)]="sorting"
+      (change)="onSortingChange()"
+    />
+    Цена по убыванию
+  </label>
+</div>

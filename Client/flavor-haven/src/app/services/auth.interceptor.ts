@@ -6,19 +6,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);
   const token = tokenService.getAccessToken();
 
-  let authReq = req.clone({
-    withCredentials: true,
+  const authReq = req.clone({
+    withCredentials: true, // Если требуется
     headers: req.headers
       .set('Accept', 'application/json')
-      .set('Content-Type', 'application/json')
+      .set(
+        'Authorization',
+        token ? `Bearer ${token}` : ''
+      ),
   });
 
-  if (token) {
-    authReq = authReq.clone({
-      headers: authReq.headers.set('Authorization', `Bearer ${token}`)
-    });
-    console.log('Token being sent:', token);
-  }
+  console.log('Request:', authReq);
 
   return next(authReq);
 };
