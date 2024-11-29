@@ -1,1 +1,27 @@
-<p>cart-item works!</p>
+<div class="cart-item">
+  <img [src]="item.dish.imageUrl" alt="{{ item.dish.name }}" class="cart-item-image" />
+  <div class="cart-item-details">
+    <h3>{{ item.dish.name }}</h3>
+    <p class="cart-item-price">{{ item.dish.price }} руб</p>
+    <div class="quantity-selector">
+      <button
+        class="quantity-button"
+        (click)="decreaseQuantity()"
+        [disabled]="isLoading || item.count <= 1"
+      >
+        -
+      </button>
+      <span class="quantity-display">{{ item.count }}</span>
+      <button
+        class="quantity-button"
+        (click)="increaseQuantity()"
+        [disabled]="isLoading"
+      >
+        +
+      </button>
+    </div>
+  </div>
+  <button class="remove-button" (click)="removeItem()" [disabled]="isLoading">
+    Удалить
+  </button>
+</div>

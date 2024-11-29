@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart-summary',
-  imports: [],
   templateUrl: './cart-summary.component.html',
-  styleUrl: './cart-summary.component.css'
+  styleUrls: ['./cart-summary.component.css'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class CartSummaryComponent {
-
+  @Input() total!: number; // Общая стоимость
+  @Input() cartEmpty!: boolean; // Пустая ли корзина
+  @Output() clearCart = new EventEmitter<void>(); // Событие очистки корзины
+  @Output() checkout = new EventEmitter<void>(); // Событие оформления заказа
 }

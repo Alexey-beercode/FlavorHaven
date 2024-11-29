@@ -1,1 +1,39 @@
-<p>register-form works!</p>
+<div class="form-container">
+  <h2>Регистрация</h2>
+  <form (ngSubmit)="register()">
+    <input
+      type="text"
+      [(ngModel)]="name"
+      placeholder="Имя"
+      name="name"
+      required
+    />
+    <input
+      type="email"
+      [(ngModel)]="email"
+      placeholder="Email"
+      name="email"
+      required
+    />
+    <input
+      type="password"
+      [(ngModel)]="password"
+      placeholder="Пароль"
+      name="password"
+      required
+    />
+    <input
+      type="password"
+      [(ngModel)]="confirmPassword"
+      placeholder="Подтверждение пароля"
+      name="confirmPassword"
+      required
+    />
+    <button [disabled]="isLoading" type="submit">
+      {{ isLoading ? 'Регистрируем...' : 'Зарегистрироваться' }}
+    </button>
+  </form>
+  <app-error-message
+    (message)="error">
+  </app-error-message>
+</div>

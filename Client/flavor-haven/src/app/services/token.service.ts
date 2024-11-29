@@ -34,11 +34,12 @@ export class TokenService {
     if (!token) return null;
 
     try {
-      const payload = JSON.parse(atob(token.split('.')[1])); // Декодирование payload
+      const payload = JSON.parse(atob(token.split('.')[1]));
       return payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] || null;
     } catch (error) {
-      console.error('Error decoding token payload:', error);
+      console.error(error);
       return null;
     }
   }
+
 }

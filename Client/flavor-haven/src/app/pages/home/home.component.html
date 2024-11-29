@@ -1,13 +1,20 @@
 <div class="home-container">
+  <!-- Компонент поиска -->
   <app-search (searchChanged)="onSearchChange($event)"></app-search>
 
-  <app-filter (categorySelected)="onCategoryChange($event)"></app-filter>
+  <!-- Основной контент -->
+  <div class="main-content">
+    <!-- Фильтрация и сортировка -->
+    <div class="filter-sort-container">
+      <app-filter (categorySelected)="onCategoryChange($event)"></app-filter>
+      <app-sort (sortingChanged)="onSortingChange($event)"></app-sort>
+    </div>
 
-  <app-sort (sortingChanged)="onSortingChange($event)"></app-sort>
-
-  <app-dish-list
-    [categoryId]="categoryId"
-    [searchName]="searchName"
-    [sorting]="sorting"
-  ></app-dish-list>
+    <!-- Список блюд -->
+    <app-dish-list
+      [categoryId]="categoryId"
+      [searchName]="searchName"
+      [sorting]="sorting"
+    ></app-dish-list>
+  </div>
 </div>

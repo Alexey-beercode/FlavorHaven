@@ -1,1 +1,5 @@
-<p>cart-summary works!</p>
+<div class="cart-summary">
+  <p class="total">Итого: {{ total }} руб</p>
+  <button class="clear-button" (click)="clearCart.emit()" [disabled]="cartEmpty">Очистить корзину</button>
+  <button class="order-button" (click)="checkout.emit()" [disabled]="cartEmpty">Оформить заказ</button>
+</div>

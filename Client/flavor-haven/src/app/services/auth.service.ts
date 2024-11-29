@@ -24,7 +24,7 @@ export class AuthService {
           subscriber.next(tokens);
           subscriber.complete();
         },
-        error: (err) => subscriber.error(err),
+        error: (err) => subscriber.error(),
       });
     });
   }
@@ -37,7 +37,7 @@ export class AuthService {
           subscriber.next(tokens);
           subscriber.complete();
         },
-        error: (err) => subscriber.error(err),
+        error: (err) => subscriber.error(),
       });
     });
   }
@@ -53,7 +53,7 @@ export class AuthService {
           subscriber.next(tokens);
           subscriber.complete();
         },
-        error: (err) => subscriber.error(err),
+        error: (err) => subscriber.error(),
       });
     });
   }

@@ -1,3 +1,20 @@
-<button class="add-to-cart-button" (click)="addToCart()">
-  Добавить в корзину
-</button>
+<div class="add-to-cart-container">
+  <!-- Счетчик количества -->
+  <div class="quantity-selector">
+    <button class="quantity-button" (click)="decreaseQuantity()">-</button>
+    <span class="quantity-display">{{ quantity }}</span> <!-- Отображение количества -->
+    <button class="quantity-button" (click)="increaseQuantity()">+</button>
+  </div>
+
+  <!-- Кнопка добавления в корзину -->
+  <button
+    class="add-to-cart-button"
+    [disabled]="isLoading"
+    (click)="addToCart()"
+  >
+    {{ isLoading ? 'Добавляется...' : 'Добавить в корзину' }}
+  </button>
+
+  <!-- Сообщение о добавлении -->
+  <div *ngIf="isAdded" class="success-message">Товар добавлен в корзину!</div>
+</div>

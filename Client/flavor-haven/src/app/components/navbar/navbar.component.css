@@ -1,19 +1,20 @@
-/* Основные стили navbar */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to right, #FF5733, #FFC300);
-  color: #FFFFFF;
+  background: linear-gradient(to right, #ff5733, #ffc300);
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 16px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  z-index: 1000;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* Граница снизу */
 }
+
+
 
 /* Свернутый navbar */
 .navbar.collapsed {

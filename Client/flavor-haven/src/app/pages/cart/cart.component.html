@@ -1,1 +1,36 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <h1>Корзина</h1>
+
+  <!-- Список товаров -->
+  <div *ngIf="!isLoading && cartItems.length; else emptyCart" class="cart-items-container">
+    <div *ngFor="let item of cartItems" class="cart-item-wrapper">
+      <app-cart-item
+        [item]="item"
+        [userId]="userId"
+        (updated)="loadCart()"
+      ></app-cart-item>
+    </div>
+  </div>
+
+  <!-- Пустая корзина -->
+  <ng-template #emptyCart>
+    <p class="empty-cart-message">Ваша корзина пуста.</p>
+  </ng-template>
+
+  <!-- Итоги и вызов модалки -->
+  <app-cart-summary
+    [total]="calculateTotal()"
+    (clearCart)="clearCart()"
+    [cartEmpty]="cartItems.length === 0"
+    (checkout)="openOrderModal()"
+  ></app-cart-summary>
+
+  <!-- Модальное окно -->
+  <app-create-order-modal
+    *ngIf="isOrderModalVisible"
+    [isVisible]="isOrderModalVisible"
+    [userId]="userId"
+    (close)="isOrderModalVisible = false"
+    (orderCreated)="handleOrderCreated()"
+  ></app-create-order-modal>
+</div>

@@ -7,13 +7,13 @@ services:
       context: .
       dockerfile: FlavorHaven.Presentation/Dockerfile
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - postgres
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_URLS=http://+:8081
+      - ASPNETCORE_HTTP_PORTS=8081
     networks:
       - flavorhaven-network
 

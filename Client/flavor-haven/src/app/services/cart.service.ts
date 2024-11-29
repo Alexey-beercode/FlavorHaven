@@ -29,6 +29,7 @@ export class CartService {
   }
 
   getCartByUserId(userId: string): Observable<CartDTO[]> {
+    console.log(`приходящий userid : ${userId}`)
     return this.http.get<CartDTO[]>(`${this.baseUrl}${this.cartUrls.getByUserId}/${userId}`);
   }
 }

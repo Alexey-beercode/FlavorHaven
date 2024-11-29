@@ -4,6 +4,7 @@ import {DishListComponent} from '../dish/dish-list.component';
 import {FilterComponent} from './filter/filter.component';
 import {SearchComponent} from './search/search.component';
 import {SortComponent} from './sort/sort.component';
+import {TokenService} from '../../services/token.service';
 
 @Component({
   selector: 'app-home',

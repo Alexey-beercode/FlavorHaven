@@ -9,5 +9,6 @@ public class OrderProfile : Profile
     public OrderProfile()
     {
         CreateMap<Order, OrderDTO>();
+        CreateMap<OrderDTO, Order>();
     }
 }

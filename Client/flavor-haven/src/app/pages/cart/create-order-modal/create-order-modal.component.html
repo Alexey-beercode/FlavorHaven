@@ -1,0 +1,46 @@
+<div class="modal-backdrop" *ngIf="isVisible">
+  <div class="modal">
+    <h2 class="modal-title">Оформление заказа</h2>
+
+    <form (ngSubmit)="createOrder()">
+      <!-- Адрес -->
+      <label class="modal-label" for="address">Адрес доставки</label>
+      <input
+        id="address"
+        type="text"
+        [(ngModel)]="address"
+        name="address"
+        class="modal-input"
+        placeholder="Введите адрес"
+        required
+      />
+
+      <!-- Примечание -->
+      <label class="modal-label" for="note">Примечание</label>
+      <textarea
+        id="note"
+        [(ngModel)]="note"
+        name="note"
+        class="modal-textarea"
+        placeholder="Введите примечание (необязательно)"
+      ></textarea>
+
+      <!-- Ошибка -->
+      <p *ngIf="error" class="modal-error">{{ error }}</p>
+
+      <!-- Кнопки -->
+      <div class="modal-buttons">
+        <button type="button" class="modal-button cancel" (click)="onClose()">
+          Отмена
+        </button>
+        <button
+          type="submit"
+          class="modal-button confirm"
+          [disabled]="isLoading"
+        >
+          {{ isLoading ? 'Оформляем...' : 'Подтвердить' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

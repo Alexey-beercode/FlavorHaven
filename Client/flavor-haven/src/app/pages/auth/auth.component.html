@@ -1,0 +1,25 @@
+<div class="auth-container">
+  <!-- Переключение между Логин/Регистрация -->
+  <div class="auth-toggle">
+    <button
+      class="toggle-button"
+      [class.active]="isLoginMode"
+      (click)="switchToLogin()"
+    >
+      Логин
+    </button>
+    <button
+      class="toggle-button"
+      [class.active]="!isLoginMode"
+      (click)="switchToRegister()"
+    >
+      Регистрация
+    </button>
+  </div>
+
+  <!-- Дочерний контейнер для форм -->
+  <div class="auth-form-wrapper">
+    <app-login-form *ngIf="isLoginMode"></app-login-form>
+    <app-register-form *ngIf="!isLoginMode"></app-register-form>
+  </div>
+</div>

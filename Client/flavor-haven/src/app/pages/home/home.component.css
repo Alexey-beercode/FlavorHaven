@@ -1,6 +1,62 @@
+/* Основной контейнер */
 .home-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  padding-top: 120px; /* Отступ под Navbar */
+}
+
+/* Основной контент (фильтрация + список) */
+.main-content {
+  display: flex;
+  gap: 20px; /* Расстояние между фильтрацией и списком блюд */
+  width: 100%;
+  align-items: flex-start; /* Выравниваем элементы по верхнему краю */
+}
+
+/* Список блюд (занимает оставшееся пространство) */
+app-dish-list {
+  flex: 1; /* Занимает оставшееся пространство */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Блок фильтрации и сортировки */
+.filter-sort-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(to right, #ffffff, #f8f8f8);
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Задаём фиксированную ширину */
+  max-width: 100%; /* Защита от слишком узких экранов */
+}
+
+/* Контейнеры фильтрации и сортировки */
+.filter-container,
+.sort-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Адаптация под мобильные устройства */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center; /* Центровка элементов */
+  }
+
+  .filter-sort-container {
+    width: 100%;
+    max-width: 400px; /* Ограничиваем ширину на мобильных */
+  }
+
+  app-dish-list {
+    width: 100%; /* Делаем список шириной в 100% на мобильных */
+  }
 }

@@ -6,8 +6,12 @@
       <div class="dish-info">
         <h3 class="dish-name">{{ dish.name }}</h3>
         <p class="dish-description">{{ dish.description }}</p>
-        <p class="dish-price">{{ dish.price | currency }}</p>
-        <app-add-to-cart [dishId]="dish.id"></app-add-to-cart>
+        <p class="dish-price">{{ dish.price }} руб</p>
+        <!-- Компонент добавления в корзину -->
+        <app-add-to-cart
+          [dishId]="dish.id"
+          [userId]="userId || ''"
+        ></app-add-to-cart>
       </div>
     </div>
   </div>
@@ -16,6 +20,8 @@
   <div class="pagination">
     <button (click)="prevPage()" [disabled]="currentPage === 1">Назад</button>
     <span>Страница {{ currentPage }} из {{ totalPageCount }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPageCount">Вперёд</button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPageCount">
+      Вперёд
+    </button>
   </div>
 </div>

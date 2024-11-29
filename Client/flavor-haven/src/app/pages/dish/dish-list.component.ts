@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DishService } from '../../services/dish.service';
+import { TokenService } from '../../services/token.service';
 import { DishDTO } from '../../models/dtos/dish/dish.dto';
 import { GetDishesRequestDTO } from '../../models/dtos/dish/get-dishes-request.dto';
 import { PaginatedResult } from '../../models/dtos/common/paginated-result.dto';
 import { SortingParameters } from '../../models/dtos/dish/sorting-parameters.dto';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, CommonModule } from '@angular/common';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 
 @Component({
@@ -12,20 +13,25 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
   templateUrl: './dish-list.component.html',
   styleUrls: ['./dish-list.component.css'],
   standalone: true,
-  imports: [CurrencyPipe, AddToCartComponent],
+  imports: [CurrencyPipe, AddToCartComponent, CommonModule],
 })
 export class DishListComponent implements OnInit, OnChanges {
   @Input() categoryId!: string | undefined;
   @Input() searchName!: string | undefined;
   @Input() sorting!: SortingParameters;
 
+  userId: string = ''; // Используем строку по умолчанию вместо null
   dishes: DishDTO[] = [];
   currentPage = 1;
   totalPageCount = 0;
 
-  constructor(private dishService: DishService) {}
+  constructor(
+    private dishService: DishService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
+    this.loadUserId(); // Загружаем userId при инициализации
     this.loadDishes();
   }
 
@@ -36,15 +42,26 @@ export class DishListComponent implements OnInit, OnChanges {
     }
   }
 
+  // Получаем userId из TokenService
+  private loadUserId(): void {
+    const userId = this.tokenService.getUserIdFromToken();
+    this.userId = userId || ''; // Если userId == null, заменяем на пустую строку
+    if (!userId) {
+      console.warn('Пользователь не авторизован: userId не найден.');
+    }
+  }
 
   loadDishes(): void {
     const request: GetDishesRequestDTO = {
-      categoryId: this.categoryId,
       searchName: this.searchName,
       sorting: this.sorting,
       pageNumber: this.currentPage,
       pageSize: 10,
     };
+
+    if (this.categoryId) {
+      request.categoryId = this.categoryId;
+    }
 
     this.dishService.getDishes(request).subscribe({
       next: (result: PaginatedResult<DishDTO>) => {
@@ -53,7 +70,7 @@ export class DishListComponent implements OnInit, OnChanges {
         this.totalPageCount = result.totalPageCount;
       },
       error: (err) => {
-        console.error('Ошибка загрузки блюд', err);
+        console.error(err);
       },
     });
   }

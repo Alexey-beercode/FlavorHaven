@@ -1,0 +1,58 @@
+/* Общий стиль для форм */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff5733;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Отступы между полями */
+  width: 100%;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s ease-in-out;
+}
+
+.form-container input:focus {
+  border-color: #ff5733;
+  outline: none;
+  background: #fff;
+}
+
+.form-container button {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(to right, #ff5733, #ffc300);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease-in-out;
+}
+
+.form-container button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
