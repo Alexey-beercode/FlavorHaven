@@ -19,6 +19,7 @@ public class CartRepository : BaseRepository<Cart>, ICartRepository
         return await _dbContext.Cart
             .Where(c => c.UserId == id && !c.IsDeleted)
             .Include(c => c.Dish)
+                .ThenInclude(item=>item.Category)
             .ToListAsync(cancellationToken);
     }
 

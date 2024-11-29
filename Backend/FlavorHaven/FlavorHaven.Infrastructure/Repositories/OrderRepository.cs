@@ -21,6 +21,7 @@ public class OrderRepository : BaseRepository<Order>, IOrderRepository
             .Include(order => order.Status)
             .Include(order => order.OrderItems)
                 .ThenInclude(item => item.Dish)
+                    .ThenInclude(item=>item.Category)
             .ToListAsync(cancellationToken);
     }
 
@@ -31,6 +32,7 @@ public class OrderRepository : BaseRepository<Order>, IOrderRepository
             .Include(order => order.Status)
             .Include(order => order.OrderItems)
                 .ThenInclude(item => item.Dish)
+                    .ThenInclude(item=>item.Category)
             .ToListAsync(cancellationToken);
     }
 

@@ -3,7 +3,7 @@ version: "3.8"
 services:
   flavorhaven.presentation:
     build:
-      context: "C:\\ASProggs\\FlavorHaven\\Backend\\FlavorHaven"
+      context: "D:\\Programming\\BusinessProject\\FlavorHaven\\Backend\\FlavorHaven"
       dockerfile: "FlavorHaven.Presentation/Dockerfile"
       target: "base"
     command: []
@@ -15,7 +15,7 @@ services:
     image: "flavorhaven.presentation:dev"
     ports: []
     volumes:
-    - "C:\\Users\\Алексей\\.nuget\\packages:/home/app/.nuget/packages"
-    - "C:\\ASProggs\\FlavorHaven\\Backend\\FlavorHaven\\FlavorHaven.Presentation:/app:rw"
-    - "C:\\ASProggs\\FlavorHaven\\Backend\\FlavorHaven:/src:rw"
+    - "C:\\Users\\Kissel\\.nuget\\packages:/home/app/.nuget/packages"
+    - "D:\\Programming\\BusinessProject\\FlavorHaven\\Backend\\FlavorHaven\\FlavorHaven.Presentation:/app:rw"
+    - "D:\\Programming\\BusinessProject\\FlavorHaven\\Backend\\FlavorHaven:/src:rw"
     working_dir: "/app"
