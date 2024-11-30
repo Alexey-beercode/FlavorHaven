@@ -1,0 +1,7 @@
+<ul *ngIf="items.length" class="order-items-list">
+  <li *ngFor="let item of items">
+    <span>{{ item.dish.name }}</span>
+    <span>({{ item.count }})</span>
+  </li>
+</ul>
+<p *ngIf="!items.length">Блюда отсутствуют.</p>

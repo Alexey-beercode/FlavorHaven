@@ -1,0 +1,78 @@
+.reviews-tab-container {
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tab-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff5733;
+  margin-bottom: 20px;
+}
+
+.new-review-form {
+  margin-bottom: 20px;
+}
+
+.new-review-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.create-review-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.create-review-button:hover {
+  background-color: #45a049;
+}
+
+.reviews-list {
+  margin-top: 20px;
+}
+
+.review-item {
+  background: #ffffff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.delete-review-button {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.delete-review-button:hover {
+  background-color: #d32f2f;
+}
+
+.success-message {
+  color: #4caf50;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: #f44336;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

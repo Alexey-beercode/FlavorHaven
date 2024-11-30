@@ -1,1 +1,54 @@
-<p>profile works!</p>
+<div class="profile-container">
+  <div class="header-buttons">
+    <!-- Кнопка "Назад" -->
+    <app-back-button></app-back-button>
+
+    <!-- Кнопка "Выйти" -->
+    <button class="logout-button" (click)="logout()">
+      <fa-icon [icon]="faSignOutAlt"></fa-icon> Выйти
+    </button>
+  </div>
+
+  <!-- Заголовок -->
+  <h1 class="profile-title">Профиль</h1>
+
+  <!-- Навигация вкладок -->
+  <nav class="tabs-nav">
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'info'"
+      (click)="switchTab('info')"
+    >
+      Личная информация
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'balance'"
+      (click)="switchTab('balance')"
+    >
+      Баланс
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'orders'"
+      (click)="switchTab('orders')"
+    >
+      Заказы
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'reviews'"
+      (click)="switchTab('reviews')"
+    >
+      Отзывы
+    </button>
+  </nav>
+
+  <!-- Содержимое вкладок -->
+  <div class="tab-content">
+    <app-user-info-tab *ngIf="activeTab === 'info'" [userId]="userId"></app-user-info-tab>
+    <app-balance-tab *ngIf="activeTab === 'balance'" [userId]="userId"></app-balance-tab>
+    <app-order-tab *ngIf="activeTab === 'orders'" [userId]="userId" (orderSelected)="switchTab('reviews')"></app-order-tab>
+    <app-reviews-tab *ngIf="activeTab === 'reviews'" [userId]="userId" [orderId]="orderId"></app-reviews-tab>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 <div class="cart-container">
-  <h1>Корзина</h1>
+  <app-back-button></app-back-button>
 
   <!-- Список товаров -->
-  <div *ngIf="!isLoading && cartItems.length; else emptyCart" class="cart-items-container">
-    <div *ngFor="let item of cartItems" class="cart-item-wrapper">
+  <div class="cart-items-container">
+    <div *ngFor="let item of cartItems; trackBy: trackByDishId" class="cart-item-wrapper">
       <app-cart-item
         [item]="item"
         [userId]="userId"
@@ -11,6 +11,7 @@
       ></app-cart-item>
     </div>
   </div>
+
 
   <!-- Пустая корзина -->
   <ng-template #emptyCart>

@@ -14,15 +14,23 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
+  // Получение всех пользователей
   getAllUsers(): Observable<UserDTO[]> {
     return this.http.get<UserDTO[]>(`${this.baseUrl}${this.userUrls.getAll}`);
   }
 
-  getUserById(id: string): Observable<UserDTO> {
+  // Получение пользователя по ID
+  getUserById(id: string | null): Observable<UserDTO> {
     return this.http.get<UserDTO>(`${this.baseUrl}${this.userUrls.getById}/${id}`);
   }
 
+  // Обновление баланса пользователя
   updateUserBalance(id: string, request: UpdateUserBalanceRequestDTO): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}${this.userUrls.updateBalance}/${id}`, request);
+  }
+
+  // Удаление пользователя
+  deleteUser(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}${this.userUrls.delete}/${id}`);
   }
 }

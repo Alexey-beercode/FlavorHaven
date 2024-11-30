@@ -7,13 +7,14 @@ import { PaginatedResult } from '../../models/dtos/common/paginated-result.dto';
 import { SortingParameters } from '../../models/dtos/dish/sorting-parameters.dto';
 import { CurrencyPipe, CommonModule } from '@angular/common';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
+import { DishDetailsComponent } from './dish-details/dish-details.component'; // Импортируем компонент модалки
 
 @Component({
   selector: 'app-dish-list',
   templateUrl: './dish-list.component.html',
   styleUrls: ['./dish-list.component.css'],
   standalone: true,
-  imports: [CurrencyPipe, AddToCartComponent, CommonModule],
+  imports: [CurrencyPipe, AddToCartComponent, DishDetailsComponent, CommonModule],
 })
 export class DishListComponent implements OnInit, OnChanges {
   @Input() categoryId!: string | undefined;
@@ -24,6 +25,8 @@ export class DishListComponent implements OnInit, OnChanges {
   dishes: DishDTO[] = [];
   currentPage = 1;
   totalPageCount = 0;
+
+  selectedDish: DishDTO | null = null; // Для хранения выбранного блюда
 
   constructor(
     private dishService: DishService,
@@ -87,5 +90,16 @@ export class DishListComponent implements OnInit, OnChanges {
       this.currentPage--;
       this.loadDishes();
     }
+  }
+
+  // Открытие модалки
+  openDishDetails(dish: DishDTO): void {
+    console.log('Dish selected:', dish);
+    this.selectedDish = dish;
+  }
+
+  // Закрытие модалки
+  closeDishDetails(): void {
+    this.selectedDish = null;
   }
 }

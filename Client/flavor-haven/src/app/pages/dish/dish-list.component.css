@@ -4,7 +4,7 @@
   gap: 20px;
   width: 100%;
   max-width: 1200px;
-  justify-content: center; /* Центровка карточек */
+  justify-content: center;
 }
 
 .dish-item {
@@ -16,8 +16,9 @@
   transition: transform 0.2s ease-in-out;
   display: flex;
   flex-direction: column;
-  width: 100%; /* Растягивается в пределах заданного столбца */
-  height: 350px; /* Фиксированная высота для всех карточек */
+  justify-content: space-between;
+  width: 100%;
+  height: 380px; /* Увеличиваем высоту */
 }
 
 .dish-item:hover {
@@ -33,9 +34,6 @@
 
 .dish-info {
   padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   flex-grow: 1;
 }
 
@@ -58,6 +56,7 @@
   text-align: right;
 }
 
+
 /* Пагинация */
 .pagination {
   display: flex;
@@ -65,6 +64,12 @@
   align-items: center;
   gap: 10px;
   margin-top: 20px;
+}
+
+.add-to-cart-wrapper {
+  margin: 16px 16px 20px 16px; /* Отступы для отделения кнопки снизу */
+  display: flex;
+  justify-content: center;
 }
 
 .pagination button {
@@ -91,6 +96,7 @@
   font-weight: bold;
   color: #FFFFFF;
 }
+
 
 /* Адаптивность */
 @media (max-width: 992px) {

@@ -1,5 +1,15 @@
-<div class="cart-item">
-  <img [src]="item.dish.imageUrl" alt="{{ item.dish.name }}" class="cart-item-image" />
+<div class="cart-item" [class.processing]="isProcessing">
+  <!-- Скелетон-загрузчик -->
+  <div class="image-placeholder" *ngIf="!item.dish.imageUrl; else loadedImage"></div>
+  <ng-template #loadedImage>
+    <img
+      [src]="item.dish.imageUrl"
+      alt="{{ item.dish.name }}"
+      class="cart-item-image"
+      loading="lazy"
+    />
+  </ng-template>
+
   <div class="cart-item-details">
     <h3>{{ item.dish.name }}</h3>
     <p class="cart-item-price">{{ item.dish.price }} руб</p>
@@ -7,7 +17,7 @@
       <button
         class="quantity-button"
         (click)="decreaseQuantity()"
-        [disabled]="isLoading || item.count <= 1"
+        [disabled]="isProcessing || item.count <= 1"
       >
         -
       </button>
@@ -15,13 +25,13 @@
       <button
         class="quantity-button"
         (click)="increaseQuantity()"
-        [disabled]="isLoading"
+        [disabled]="isProcessing"
       >
         +
       </button>
     </div>
   </div>
-  <button class="remove-button" (click)="removeItem()" [disabled]="isLoading">
+  <button class="remove-button" (click)="removeItem()" [disabled]="isProcessing">
     Удалить
   </button>
 </div>

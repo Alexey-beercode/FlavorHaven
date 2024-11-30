@@ -1,1 +1,26 @@
-<p>dish-details works!</p>
+<div class="modal-backdrop" *ngIf="isVisible && dish">
+  <div class="modal-content">
+    <!-- Заголовок модалки -->
+    <div class="modal-header">
+      <h2 class="modal-title">{{ dish.name }}</h2>
+      <button class="close-button" (click)="close()">×</button>
+    </div>
+
+    <!-- Основное содержимое -->
+    <div class="modal-body">
+      <img [src]="dish.imageUrl" [alt]="dish.name" class="dish-image" />
+      <div class="dish-info">
+        <p class="dish-description">{{ dish.description }}</p>
+        <p class="dish-price"><strong>Цена:</strong> {{ dish.price }} руб</p>
+      </div>
+    </div>
+
+    <!-- Добавление в корзину -->
+    <div class="modal-footer">
+      <app-add-to-cart
+        [dishId]="dish.id"
+        [userId]="userId"
+      ></app-add-to-cart>
+    </div>
+  </div>
+</div>

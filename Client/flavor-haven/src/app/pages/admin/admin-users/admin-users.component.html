@@ -1,0 +1,60 @@
+<div class="admin-users-container">
+  <!-- Ошибка -->
+  <app-error-message *ngIf="error" [message]="error"></app-error-message>
+
+  <!-- Загрузка -->
+  <p *ngIf="isLoading">Загрузка пользователей...</p>
+
+  <!-- Таблица пользователей -->
+  <table *ngIf="!isLoading && users.length" class="users-table">
+    <thead>
+    <tr>
+      <th>Имя пользователя</th>
+      <th>Email</th>
+      <th>Баланс</th>
+      <th>Роли</th>
+      <th>Добавить роль</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.userName }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.balance }} руб</td>
+      <td>
+        <ul class="roles-list">
+          <li *ngFor="let role of user.roles" class="role-item">
+            {{ role.name }}
+            <button
+              class="delete-button"
+              (click)="removeRoleFromUser(user.id, role.id)"
+            >
+              Удалить
+            </button>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <select
+          #roleSelect
+          (change)="addRoleToUser(user.id, roleSelect.value)"
+          class="role-select"
+        >
+          <option value="" disabled selected>Выберите роль</option>
+          <ng-container *ngFor="let role of allRoles">
+            <option
+              *ngIf="!hasUserRole(user, role)"
+              [value]="role.id"
+            >
+              {{ role.name }}
+            </option>
+          </ng-container>
+        </select>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Сообщение об отсутствии пользователей -->
+  <p *ngIf="!isLoading && !users.length">Пользователи отсутствуют.</p>
+</div>

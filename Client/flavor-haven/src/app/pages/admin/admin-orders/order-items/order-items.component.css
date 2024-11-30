@@ -1,0 +1,31 @@
+.order-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-items-list li {
+  background: #f4f4f4;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-items-list li:hover {
+  background: #e0e0e0;
+}
+
+.order-items-list li span {
+  font-weight: bold;
+  color: #555;
+}
+
+p {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}

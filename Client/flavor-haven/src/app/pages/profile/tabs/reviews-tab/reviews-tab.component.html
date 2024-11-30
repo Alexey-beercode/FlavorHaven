@@ -1,1 +1,32 @@
-<p>reviews-tab works!</p>
+<div class="reviews-tab">
+  <!-- Загрузка -->
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+  <!-- Ошибка -->
+  <app-error-message *ngIf="!isLoading && error" [message]="error"></app-error-message>
+
+  <!-- Форма для отзыва -->
+  <div *ngIf="!isLoading && orderId" class="review-form">
+    <textarea
+      [(ngModel)]="review"
+      placeholder="Напишите ваш отзыв..."
+      rows="5"
+      class="review-textarea"
+    ></textarea>
+    <button
+      class="submit-review-button"
+      (click)="submitReview()"
+      [disabled]="isLoading || !review"
+    >
+      Отправить отзыв
+    </button>
+  </div>
+
+  <!-- Отзывы (если они есть) -->
+  <div *ngIf="!isLoading && reviews.length > 0">
+    <h3>Ваши отзывы</h3>
+    <div *ngFor="let rev of reviews" class="review-card">
+      <p>{{ rev.note }}</p>
+    </div>
+  </div>
+</div>

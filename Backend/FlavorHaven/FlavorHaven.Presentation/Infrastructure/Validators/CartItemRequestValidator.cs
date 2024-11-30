@@ -11,7 +11,6 @@ public class CartItemRequestValidator : AbstractValidator<CartItemRequestDTO>
             .NotEmpty();
 
         RuleFor(x => x.Count)
-            .GreaterThan(0)
-            .LessThanOrEqualTo(99);
+            .GreaterThan(0);
     }
 }

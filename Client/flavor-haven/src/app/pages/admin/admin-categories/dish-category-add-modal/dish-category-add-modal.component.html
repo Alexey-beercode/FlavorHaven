@@ -1,0 +1,16 @@
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <h2>Добавить категорию</h2>
+    <p *ngIf="error" class="error-message">{{ error }}</p>
+    <div class="form-group">
+      <label for="category-name">Название:</label>
+      <input id="category-name" type="text" [(ngModel)]="name" />
+    </div>
+    <div class="modal-actions">
+      <button class="save-button" (click)="saveCategory()" [disabled]="isLoading">
+        {{ isLoading ? 'Сохранение...' : 'Сохранить' }}
+      </button>
+      <button class="cancel-button" (click)="closeModal()">Отмена</button>
+    </div>
+  </div>
+</div>

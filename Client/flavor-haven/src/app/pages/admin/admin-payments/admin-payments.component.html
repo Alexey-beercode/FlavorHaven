@@ -1,0 +1,30 @@
+<div class="admin-payments-container">
+  <!-- Ошибка -->
+  <p *ngIf="error" class="error-message">{{ error }}</p>
+
+  <!-- Загрузка -->
+  <p *ngIf="isLoading" class="loading-message">Загрузка...</p>
+
+  <!-- Таблица платежей -->
+  <table *ngIf="!isLoading && payments.length" class="payments-table">
+    <thead>
+    <tr>
+      <th>Имя пользователя</th>
+      <th>Сумма</th>
+      <th>Статус</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let payment of payments">
+      <td>{{ payment.userName || 'Неизвестно' }}</td>
+      <td>{{ payment.amount }} руб</td>
+      <td>{{ payment.isCanceled ? 'Отменён' : 'Завершён' }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Сообщение об отсутствии данных -->
+  <p *ngIf="!isLoading && !payments.length" class="no-data-message">
+    Платежи отсутствуют.
+  </p>
+</div>

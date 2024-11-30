@@ -2,12 +2,19 @@
   <div class="dish-list">
     <!-- Список блюд -->
     <div *ngFor="let dish of dishes" class="dish-item">
-      <img [src]="dish.imageUrl" [alt]="dish.name" class="dish-image" />
-      <div class="dish-info">
+      <img
+        [src]="dish.imageUrl"
+        [alt]="dish.name"
+        class="dish-image"
+        (click)="openDishDetails(dish)"
+      />
+      <div class="dish-info" (click)="openDishDetails(dish)">
         <h3 class="dish-name">{{ dish.name }}</h3>
         <p class="dish-description">{{ dish.description }}</p>
         <p class="dish-price">{{ dish.price }} руб</p>
-        <!-- Компонент добавления в корзину -->
+      </div>
+      <!-- Компонент добавления в корзину -->
+      <div class="add-to-cart-wrapper">
         <app-add-to-cart
           [dishId]="dish.id"
           [userId]="userId || ''"
@@ -24,4 +31,14 @@
       Вперёд
     </button>
   </div>
+
+  <!-- Модальное окно -->
+  <app-dish-details
+    *ngIf="selectedDish"
+    [dish]="selectedDish"
+    [userId]="userId"
+    [isVisible]="true"
+    (closeModal)="closeDishDetails()"
+  ></app-dish-details>
+
 </div>

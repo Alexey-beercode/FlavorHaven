@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -6,6 +6,7 @@ import { LoginRequestDTO } from '../models/dtos/auth/login-request.dto';
 import { RegisterRequestDTO } from '../models/dtos/auth/register-request.dto';
 import { TokensDTO } from '../models/dtos/auth/tokens.dto';
 import { TokenService } from './token.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -58,11 +59,14 @@ export class AuthService {
     });
   }
 
-  revoke(userId: string): Observable<void> {
+  revoke(userId: string | null): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}${this.authUrls.revoke}/${userId}`, {});
   }
 
-  logout():void{
+  logout(): void {
     this.tokenService.clearTokens();
+    // Перенаправление на страницу логина
+    inject(Router).navigate(['/login']);
   }
+
 }

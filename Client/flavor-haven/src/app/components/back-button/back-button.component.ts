@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
   standalone: true,
 })
 export class BackButtonComponent {
-  @Input() label: string = 'Back';
+  @Input() label: string = 'Назад';
 
   constructor(private location: Location) {}
 

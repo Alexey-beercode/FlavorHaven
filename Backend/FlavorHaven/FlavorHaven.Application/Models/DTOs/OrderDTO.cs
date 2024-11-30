@@ -9,6 +9,7 @@ public class OrderDTO
     public string Note { get; set; }
     public string Address { get; set; }
     public bool IsPayed { get; set; }
+    public Guid UserId { get; set; }
     
     public OrderStatusDTO Status { get; set; }
     

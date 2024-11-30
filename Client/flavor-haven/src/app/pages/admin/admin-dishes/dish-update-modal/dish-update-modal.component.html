@@ -1,0 +1,73 @@
+<div class="modal">
+  <div class="modal-content">
+    <h2>Изменить блюдо</h2>
+    <form (ngSubmit)="updateDish()">
+      <!-- Название -->
+      <label>
+        Название:
+        <input
+          type="text"
+          [(ngModel)]="updatedDish.name"
+          name="name"
+          required
+          class="form-control"
+        />
+      </label>
+
+      <!-- Описание -->
+      <label>
+        Описание:
+        <textarea
+          [(ngModel)]="updatedDish.description"
+          name="description"
+          class="form-control"
+        ></textarea>
+      </label>
+
+      <!-- Цена -->
+      <label>
+        Цена:
+        <input
+          type="number"
+          [(ngModel)]="updatedDish.price"
+          name="price"
+          required
+          class="form-control"
+        />
+      </label>
+
+      <!-- Ссылка на изображение -->
+      <label>
+        Ссылка на изображение:
+        <input
+          type="url"
+          [(ngModel)]="updatedDish.imageUrl"
+          name="imageUrl"
+          class="form-control"
+        />
+      </label>
+
+      <!-- Категория -->
+      <label>
+        Категория:
+        <select
+          [(ngModel)]="updatedDish.categoryId"
+          name="categoryId"
+          required
+          class="form-control"
+        >
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </label>
+
+      <div class="buttons">
+        <button type="submit" class="btn btn-save">Сохранить</button>
+        <button type="button" class="btn btn-cancel" (click)="close.emit()">
+          Отмена
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

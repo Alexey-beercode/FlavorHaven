@@ -1,0 +1,97 @@
+.order-tab {
+  padding: 20px;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.order-header h3 {
+  font-size: 20px;
+  color: #ff5733;
+}
+
+.order-header p {
+  font-size: 14px;
+  color: #777;
+}
+
+.order-status {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.order-status.created {
+  background: #ffc300;
+  color: #ffffff;
+}
+
+.order-status.processing {
+  background: #ff5733;
+  color: #ffffff;
+}
+
+.order-status.completed {
+  background: #28a745;
+  color: #ffffff;
+}
+
+.order-status.cancelled {
+  background: #d9534f;
+  color: #ffffff;
+}
+
+.order-details {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.order-items ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-items li {
+  margin: 5px 0;
+}
+
+.pay-button {
+  background: linear-gradient(to right, #ff5733, #ffc300);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.pay-button:hover {
+  background: linear-gradient(to right, #ffc300, #ff5733);
+}
+
+.empty-message {
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+}

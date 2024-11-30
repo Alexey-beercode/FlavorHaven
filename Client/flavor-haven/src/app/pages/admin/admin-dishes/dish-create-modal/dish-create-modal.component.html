@@ -1,0 +1,84 @@
+<div class="modal">
+  <div class="modal-content">
+    <h2 class="modal-title">Добавить блюдо</h2>
+    <form (ngSubmit)="createDish()" class="modal-form">
+      <!-- Название -->
+      <div class="form-group">
+        <label for="name">Название</label>
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="dish.name"
+          name="name"
+          required
+          class="form-input"
+          placeholder="Введите название блюда"
+        />
+      </div>
+
+      <!-- Описание -->
+      <div class="form-group">
+        <label for="description">Описание</label>
+        <textarea
+          id="description"
+          [(ngModel)]="dish.description"
+          name="description"
+          class="form-input"
+          placeholder="Введите описание блюда"
+        ></textarea>
+      </div>
+
+      <!-- Цена -->
+      <div class="form-group">
+        <label for="price">Цена</label>
+        <input
+          id="price"
+          type="number"
+          [(ngModel)]="dish.price"
+          name="price"
+          required
+          class="form-input"
+          placeholder="Введите цену блюда"
+        />
+      </div>
+
+      <!-- Ссылка на изображение -->
+      <div class="form-group">
+        <label for="imageUrl">Ссылка на изображение</label>
+        <input
+          id="imageUrl"
+          type="url"
+          [(ngModel)]="dish.imageUrl"
+          name="imageUrl"
+          class="form-input"
+          placeholder="Введите ссылку на изображение"
+        />
+      </div>
+
+      <!-- Категория -->
+      <div class="form-group">
+        <label for="categoryId">Категория</label>
+        <select
+          id="categoryId"
+          [(ngModel)]="dish.categoryId"
+          name="categoryId"
+          required
+          class="form-input"
+        >
+          <option value="" disabled selected>Выберите категорию</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Кнопки -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Создать</button>
+        <button type="button" class="btn btn-secondary" (click)="close.emit()">
+          Отмена
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

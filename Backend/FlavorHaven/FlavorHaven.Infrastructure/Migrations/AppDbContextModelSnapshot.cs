@@ -99,6 +99,98 @@ namespace FlavorHaven.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DishCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("70453c1c-7723-4caa-93b6-7457ddd03d7a"),
+                            IsDeleted = false,
+                            Name = "Японская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("e5c45cbb-d201-4841-ace2-2128b8c5cbb0"),
+                            IsDeleted = false,
+                            Name = "Итальянская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("c9eeb335-395c-43ed-af33-57a47667c6e9"),
+                            IsDeleted = false,
+                            Name = "Французская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("bc53d280-fbd1-4e0f-9543-c4c0137d1ac0"),
+                            IsDeleted = false,
+                            Name = "Мексиканская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("e41ced16-057c-464d-8c56-5ebd1ae9dec3"),
+                            IsDeleted = false,
+                            Name = "Индийская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("720ca151-d4d7-42f5-9e0d-3de725053d98"),
+                            IsDeleted = false,
+                            Name = "Китайская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("e7a04a14-687b-4b73-937c-b87a767cfe4f"),
+                            IsDeleted = false,
+                            Name = "Тайская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("bc8d82f4-a7ef-4f3f-aea2-80dbdf87696f"),
+                            IsDeleted = false,
+                            Name = "Грузинская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("aeee7525-9d70-43c2-8f16-74298924edf7"),
+                            IsDeleted = false,
+                            Name = "Белорусская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("1ec3e532-c811-4ced-bd25-ff16e09a99c4"),
+                            IsDeleted = false,
+                            Name = "Русская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("25069d7e-7986-45fe-ab91-325d67d7fe41"),
+                            IsDeleted = false,
+                            Name = "Вьетнамская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("161e8fbe-ee11-415d-96b7-5d9089922164"),
+                            IsDeleted = false,
+                            Name = "Корейская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("77d8e241-21a6-416e-803d-f612dcbcd6f1"),
+                            IsDeleted = false,
+                            Name = "Американская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("d967c534-637e-4dd8-af4c-ebe38fe72ea8"),
+                            IsDeleted = false,
+                            Name = "Испанская кухня"
+                        },
+                        new
+                        {
+                            Id = new Guid("2c6706f0-601a-488a-a905-08e96647eda9"),
+                            IsDeleted = false,
+                            Name = "Средиземноморская кухня"
+                        });
                 });
 
             modelBuilder.Entity("FlavorHaven.Domain.Entities.Order", b =>
@@ -193,43 +285,43 @@ namespace FlavorHaven.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6a312435-57cf-46f8-b329-ea9be8f04351"),
+                            Id = new Guid("2314de32-2e86-4869-8008-8eb828cf7887"),
                             IsDeleted = false,
                             Name = "Created"
                         },
                         new
                         {
-                            Id = new Guid("58eb57d0-4030-4d8c-94e5-220708af6236"),
+                            Id = new Guid("7fbb8085-62f3-490d-8e7e-dbd437aae744"),
                             IsDeleted = false,
                             Name = "Processing"
                         },
                         new
                         {
-                            Id = new Guid("8f4d6034-ece7-42af-bc07-c01fd1f14143"),
+                            Id = new Guid("7b05f88b-5cd4-4ed8-aa22-52c4a08be24a"),
                             IsDeleted = false,
                             Name = "Cooking"
                         },
                         new
                         {
-                            Id = new Guid("28ab13cb-c0d4-458f-8e04-6483bc3a9899"),
+                            Id = new Guid("5cd95ec8-2ea3-4550-be1f-b1e4aa19db2f"),
                             IsDeleted = false,
                             Name = "Ready"
                         },
                         new
                         {
-                            Id = new Guid("ffefb033-b691-40d6-8571-eef74d996894"),
+                            Id = new Guid("81881342-49e3-4f7c-8eeb-1042b1a7aa67"),
                             IsDeleted = false,
                             Name = "Delivering"
                         },
                         new
                         {
-                            Id = new Guid("e14e0f0d-03ae-4fdb-b53d-f649c215542f"),
+                            Id = new Guid("eae2cd85-da94-4253-8570-3f69eecc1e56"),
                             IsDeleted = false,
                             Name = "Completed"
                         },
                         new
                         {
-                            Id = new Guid("5415a515-ecd7-4f38-8499-1ca7f0729e10"),
+                            Id = new Guid("099ed6ad-4323-40e8-ab4f-5af05032003e"),
                             IsDeleted = false,
                             Name = "Cancelled"
                         });
@@ -319,7 +411,7 @@ namespace FlavorHaven.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7648aed1-b4bd-4836-9b79-7a597fdb8cc2"),
+                            Id = new Guid("f0edc8bb-415b-4fa6-bd39-4ea1b88193f1"),
                             IsDeleted = false,
                             Name = "Resident"
                         });
@@ -373,7 +465,7 @@ namespace FlavorHaven.Infrastructure.Migrations
                             Balance = 0m,
                             Email = "admin@gmail.com",
                             IsDeleted = false,
-                            PasswordHash = "$2a$11$LQ9qLAzQcDXXXaC7pNVJ3.41k/JlwERIy0RNxBpPSS1aUUVqKPEB2",
+                            PasswordHash = "$2a$11$VeYQU5caDBo7XBTCm2t/EunaNEeUNrXzT4.ETclhhubiPFq4izKE6",
                             RefreshToken = "",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserName = "Admin"
@@ -405,7 +497,7 @@ namespace FlavorHaven.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dcd0ce9d-71ba-4e0f-b229-317b0498ae74"),
+                            Id = new Guid("5bdd7d3f-2830-496e-9279-22d10991135b"),
                             IsDeleted = false,
                             RoleId = new Guid("583e1840-ba88-418d-ae9e-4ce7571f0946"),
                             UserId = new Guid("bd65e7bd-e25a-4935-81d1-05093b5f48c0")

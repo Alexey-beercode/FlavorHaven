@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   standalone: true,
 })
 export class ErrorMessageComponent {
-  @Input() message: string = 'An unexpected error occurred.';
+  @Input() message: string = '';
 }

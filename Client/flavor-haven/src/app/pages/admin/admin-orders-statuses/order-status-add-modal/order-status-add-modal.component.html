@@ -1,0 +1,24 @@
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Добавить новый статус заказа</h2>
+      <button class="close-button" (click)="close()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <input
+        type="text"
+        class="status-input"
+        placeholder="Название статуса"
+        [(ngModel)]="statusName"
+      />
+     <app-error-message (message)="error"></app-error-message>
+    </div>
+
+    <div class="modal-footer">
+      <button class="save-button" [disabled]="isLoading" (click)="createStatus()">
+        {{ isLoading ? 'Создание...' : 'Создать' }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,33 @@
-<p>user-info-tab works!</p>
+<div class="user-info-tab">
+  <!-- Загрузка -->
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+  <!-- Ошибка -->
+  <app-error-message *ngIf="!isLoading && error" [message]="error"></app-error-message>
+
+  <!-- Информация о пользователе -->
+  <div *ngIf="!isLoading && user" class="user-card">
+    <h2 class="user-card-title">Информация о пользователе</h2>
+    <div class="user-card-detail">
+      <p><strong>Имя:</strong> {{ user.userName }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p class="user-card-balance">
+        <strong>Баланс:</strong> {{ user.balance }} руб
+      </p>
+    </div>
+
+    <!-- Кнопка для перехода в админ панель -->
+    <button
+      *ngIf="userIsAdmin"
+      class="admin-panel-button"
+      (click)="navigateToAdminPanel()"
+    >
+      Перейти в админ панель
+    </button>
+  </div>
+
+  <!-- Если загрузка пустая -->
+  <p class="loading-message" *ngIf="!isLoading && !user">
+    Данные о пользователе недоступны.
+  </p>
+</div>

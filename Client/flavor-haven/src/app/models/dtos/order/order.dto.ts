@@ -9,6 +9,7 @@ export interface OrderDTO {
   note: string;
   address: string;
   isPayed: boolean;
+  userId:string;
   status: OrderStatusDTO;
   orderItems: OrderItemDTO[];
 }

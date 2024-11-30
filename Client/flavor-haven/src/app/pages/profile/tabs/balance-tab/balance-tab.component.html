@@ -1,1 +1,35 @@
-<p>balance-tab works!</p>
+<div class="balance-tab-container">
+  <h2 class="tab-title">Баланс</h2>
+
+  <!-- Ошибки -->
+  <app-error-message *ngIf="errorMessage" [message]="errorMessage"></app-error-message>
+
+  <!-- Успешные сообщения -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <!-- Баланс пользователя -->
+  <div *ngIf="user" class="balance-info">
+    <p><strong>Текущий баланс:</strong> {{ user.balance }} руб.</p>
+  </div>
+
+  <!-- Форма пополнения баланса -->
+  <div class="deposit-form">
+    <label for="depositAmount">Введите сумму для пополнения:</label>
+    <input
+      type="number"
+      id="depositAmount"
+      [(ngModel)]="depositAmount"
+      [min]="1"
+      placeholder="Сумма пополнения"
+      class="amount-input"
+    />
+    <button (click)="onDeposit()" [disabled]="loading" class="deposit-button">
+      Пополнить
+    </button>
+  </div>
+
+  <!-- Спиннер загрузки -->
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+</div>

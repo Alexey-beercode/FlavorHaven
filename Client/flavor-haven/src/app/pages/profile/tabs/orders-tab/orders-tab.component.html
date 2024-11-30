@@ -1,1 +1,63 @@
-<p>orders-tab works!</p>
+<div class="order-tab">
+  <!-- Загрузка -->
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+  <!-- Ошибка -->
+  <app-error-message *ngIf="!isLoading && error" [message]="error"></app-error-message>
+
+  <!-- Список заказов -->
+  <div *ngIf="!isLoading && orders.length > 0" class="orders-list">
+    <div *ngFor="let order of orders" class="order-card">
+      <!-- Заголовок заказа -->
+      <div class="order-header">
+        <h3>Заказ №{{ order.orderNumber }}</h3>
+        <p>{{ order.createdTime | date: 'medium' }}</p>
+        <span class="order-status" [class]="order.status.name.toLowerCase()">
+          {{ order.status.name }}
+        </span>
+      </div>
+
+      <!-- Детали заказа -->
+      <div class="order-details">
+        <p><strong>Адрес:</strong> {{ order.address }}</p>
+        <p><strong>Примечание:</strong> {{ order.note || 'Нет' }}</p>
+        <p><strong>Общая сумма:</strong> {{ order.amount }} руб</p>
+        <p><strong>Оплачен:</strong> {{ order.isPayed ? 'Да' : 'Нет' }}</p>
+      </div>
+
+      <!-- Список блюд -->
+      <div class="order-items">
+        <h4>Блюда:</h4>
+        <ul>
+          <li *ngFor="let item of order.orderItems">
+            {{ item.dish.name }} - {{ item.count }} шт.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Кнопка оставить отзыв (только для завершенных заказов) -->
+      <button
+        *ngIf="order.status.name === 'Завершён'"
+        class="pay-button"
+        (click)="writeReview(order.id)"
+      >
+        Оставить отзыв
+      </button>
+
+      <!-- Кнопка оплаты -->
+      <button
+        *ngIf="!order.isPayed"
+        class="pay-button"
+        [disabled]="isLoading || !user || user.balance < order.amount"
+        (click)="payOrder(order)"
+      >
+        Оплатить
+      </button>
+    </div>
+  </div>
+
+  <!-- Пустой список заказов -->
+  <p *ngIf="!isLoading && orders.length === 0" class="empty-message">
+    У вас пока нет заказов.
+  </p>
+</div>

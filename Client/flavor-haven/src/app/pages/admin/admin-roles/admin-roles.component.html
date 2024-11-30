@@ -1,0 +1,38 @@
+<div class="admin-roles-container">
+  <!-- Кнопка добавления роли -->
+  <button class="add-button" (click)="openAddModal()">Добавить роль</button>
+
+  <!-- Ошибка -->
+  <p *ngIf="error" class="error-message">{{ error }}</p>
+
+  <!-- Загрузка -->
+  <p *ngIf="isLoading">Загрузка...</p>
+
+  <!-- Таблица ролей -->
+  <table *ngIf="!isLoading && roles.length" class="roles-table">
+    <thead>
+    <tr>
+      <th>Название</th>
+      <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let role of roles">
+      <td>{{ role.name }}</td>
+      <td>
+        <button class="delete-button" (click)="deleteRole(role.id)">Удалить</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Сообщение об отсутствии ролей -->
+  <p *ngIf="!isLoading && !roles.length">Роли отсутствуют.</p>
+
+  <!-- Модалка добавления -->
+  <app-role-add-modal
+    *ngIf="isAddModalVisible"
+    (roleAdded)="handleRoleAdded($event)"
+    (close)="closeAddModal()"
+  ></app-role-add-modal>
+</div>

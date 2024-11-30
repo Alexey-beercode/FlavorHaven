@@ -32,5 +32,6 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
         modelBuilder.SeedUsersRolesData();
         modelBuilder.SeedOrderStatuses();
+        modelBuilder.SeedCategories();
     }
 }

@@ -6,13 +6,14 @@ import { CartSummaryComponent } from './cart-summary/cart-summary.component';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../../services/token.service';
 import {CreateOrderModalComponent} from './create-order-modal/create-order-modal.component';
+import {BackButtonComponent} from '../../components/back-button/back-button.component';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
   standalone: true,
-  imports: [CartItemComponent, CartSummaryComponent, CreateOrderModalComponent, CommonModule],
+  imports: [CartItemComponent, CartSummaryComponent, CreateOrderModalComponent, CommonModule, BackButtonComponent],
 })
 export class CartComponent implements OnInit {
   cartItems: CartDTO[] = [];
@@ -76,4 +77,8 @@ export class CartComponent implements OnInit {
     this.clearCart(); // Очистить корзину
     this.isOrderModalVisible = false; // Закрыть модалку
   }
+  trackByDishId(index: number, item: CartDTO): string {
+    return item.dish.id; // Уникальный идентификатор блюда
+  }
+
 }

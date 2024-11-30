@@ -1,0 +1,29 @@
+<div class="admin-home">
+  <h1 class="admin-title">Админ Панель</h1>
+
+  <!-- Навигация по вкладкам -->
+  <nav class="tabs-nav">
+    <button
+      *ngFor="let tab of tabs"
+      [class.active]="activeTab === tab.name"
+      (click)="switchTab(tab.name)"
+      class="tab-button"
+    >
+      {{ tab.label }}
+    </button>
+  </nav>
+
+  <!-- Содержимое текущей вкладки -->
+  <div class="tab-content">
+    <ng-container [ngSwitch]="activeTab">
+      <app-admin-categories *ngSwitchCase="'categories'"></app-admin-categories>
+      <app-admin-dishes *ngSwitchCase="'dishes'"></app-admin-dishes>
+      <app-admin-payments *ngSwitchCase="'payments'"></app-admin-payments>
+      <app-admin-orders *ngSwitchCase="'orders'"></app-admin-orders>
+      <app-admin-orders-statuses *ngSwitchCase="'order-statuses'"></app-admin-orders-statuses>
+      <app-admin-roles *ngSwitchCase="'roles'"></app-admin-roles>
+      <app-admin-users *ngSwitchCase="'users'"></app-admin-users>
+      <p *ngSwitchDefault>Выберите вкладку для управления.</p>
+    </ng-container>
+  </div>
+</div>

@@ -1,10 +1,9 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from './auth.service';
 import { TokenService } from './token.service';
+import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { catchError, switchMap } from 'rxjs/operators';
-import { throwError, of } from 'rxjs';
+import { catchError, switchMap, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
@@ -15,32 +14,27 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const authReq = req.clone({
     withCredentials: true,
-    headers: req.headers.set(
-      'Authorization',
-      token ? `Bearer ${token}` : ''
-    ),
+    headers: req.headers.set('Authorization', token ? `Bearer ${token}` : ''),
   });
 
   return next(authReq).pipe(
     catchError((error) => {
-      if (error.status === 401) {
-        // Если 401, пробуем рефреш токена
+      if (error.status === 401 && !req.url.includes('/auth/refresh')) {
+        // Если 401 и не запрос на refresh, пробуем обновить токен
         return authService.refreshToken().pipe(
           switchMap((tokens) => {
             tokenService.saveTokens(tokens.accessToken, tokens.refreshToken);
             const retryReq = authReq.clone({
-              headers: authReq.headers.set(
-                'Authorization',
-                `Bearer ${tokens.accessToken}`
-              ),
+              headers: authReq.headers.set('Authorization', `Bearer ${tokens.accessToken}`),
             });
             return next(retryReq);
           }),
           catchError((refreshError) => {
-            // Если рефреш не удался, переходим на логин
+            // Если рефреш не удался, очищаем токены и перенаправляем на логин
+            console.error('Ошибка обновления токена:', refreshError);
             tokenService.clearTokens();
             router.navigate(['/login']);
-            return throwError(() => refreshError);
+            return throwError(() => new Error('Не удалось обновить токен'));
           })
         );
       }

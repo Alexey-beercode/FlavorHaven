@@ -1,0 +1,85 @@
+.profile-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logout-button {
+  background: linear-gradient(to right, #FF5733, #FFC300);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Отступ между иконкой и текстом */
+}
+
+.logout-button:hover {
+  transform: scale(1.05);
+}
+
+.logout-button:active {
+  transform: scale(0.95);
+}
+
+.profile-title {
+  font-size: 24px;
+  color: #ff5733;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tabs-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: #f5f5f5;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.tab-button.active {
+  background: linear-gradient(to right, #ff5733, #ffc300);
+  color: #ffffff;
+}
+
+.tab-button:hover {
+  background: rgba(255, 87, 51, 0.8);
+  color: #ffffff;
+}
+
+.tab-content {
+  margin-top: 20px;
+}

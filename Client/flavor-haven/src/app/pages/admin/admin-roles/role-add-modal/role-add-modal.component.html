@@ -1,0 +1,24 @@
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Добавить новую роль</h2>
+      <button class="close-button" (click)="close()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <input
+        type="text"
+        class="role-input"
+        placeholder="Название роли"
+        [(ngModel)]="roleName"
+      />
+      <p *ngIf="error" class="error-message">{{ error }}</p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="save-button" [disabled]="isLoading" (click)="createRole()">
+        {{ isLoading ? 'Создание...' : 'Создать' }}
+      </button>
+    </div>
+  </div>
+</div>
