@@ -7,6 +7,7 @@ import {AdminOrdersComponent} from '../admin-orders/admin-orders.component';
 import {AdminRolesComponent} from '../admin-roles/admin-roles.component';
 import {AdminUsersComponent} from '../admin-users/admin-users.component';
 import {AdminOrdersStatusesComponent} from '../admin-orders-statuses/admin-orders-statuses.component';
+import {AdminReviewsComponent} from '../admin-reviews/admin-reviews.component';
 
 @Component({
   selector: 'app-admin-home',
@@ -23,6 +24,7 @@ import {AdminOrdersStatusesComponent} from '../admin-orders-statuses/admin-order
     AdminOrdersStatusesComponent,
     AdminRolesComponent,
     AdminUsersComponent,
+    AdminReviewsComponent,
   ],
 })
 export class AdminHomeComponent {
@@ -35,6 +37,7 @@ export class AdminHomeComponent {
     { name: 'payments', label: 'Платежи' },
     { name: 'orders', label: 'Заказы' },
     { name: 'order-statuses', label: 'Статусы заказов' },
+    {name:'reviews',label: 'Отзывы'},
     { name: 'roles', label: 'Роли' },
     { name: 'users', label: 'Пользователи' },
   ];

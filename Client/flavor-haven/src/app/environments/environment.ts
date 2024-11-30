@@ -37,6 +37,7 @@ export const environment = {
       getByUser: '/api/order/get-by-user',
       delete: '/api/order/delete', // Удаление заказа
       updateStatus: '/api/order/update-status', // Обновление статуса заказа
+      getAll:'/api/order/getAll',
     },
 
     orderStatus: {

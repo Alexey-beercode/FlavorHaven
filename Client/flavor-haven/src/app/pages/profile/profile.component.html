@@ -49,6 +49,6 @@
     <app-user-info-tab *ngIf="activeTab === 'info'" [userId]="userId"></app-user-info-tab>
     <app-balance-tab *ngIf="activeTab === 'balance'" [userId]="userId"></app-balance-tab>
     <app-order-tab *ngIf="activeTab === 'orders'" [userId]="userId" (orderSelected)="switchTab('reviews')"></app-order-tab>
-    <app-reviews-tab *ngIf="activeTab === 'reviews'" [userId]="userId" [orderId]="orderId"></app-reviews-tab>
+    <app-reviews-tab *ngIf="activeTab === 'reviews'" [userId]="userId"></app-reviews-tab>
   </div>
 </div>

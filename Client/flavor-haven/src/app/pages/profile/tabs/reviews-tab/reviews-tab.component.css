@@ -12,67 +12,57 @@
   margin-bottom: 20px;
 }
 
-.new-review-form {
-  margin-bottom: 20px;
-}
-
-.new-review-form textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.create-review-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.create-review-button:hover {
-  background-color: #45a049;
-}
-
-.reviews-list {
-  margin-top: 20px;
-}
-
-.review-item {
+.reviews-tab {
+  padding: 20px;
   background: #ffffff;
-  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-card {
+  background: #ffffff;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.review-card p {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.review-header {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
   margin-bottom: 10px;
+}
+
+.order-info {
+  margin-top: 10px;
+  background: #f9f9f9;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.delete-review-button {
-  background-color: #f44336;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 8px;
+.order-info p {
+  margin: 5px 0;
   font-size: 14px;
-  cursor: pointer;
-  margin-top: 10px;
+  color: #666;
 }
 
-.delete-review-button:hover {
-  background-color: #d32f2f;
-}
-
-.success-message {
-  color: #4caf50;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.error-message {
+.no-reviews-message {
+  font-size: 16px;
   color: #f44336;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }

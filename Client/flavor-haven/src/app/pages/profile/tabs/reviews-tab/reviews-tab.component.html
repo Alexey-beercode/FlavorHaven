@@ -5,28 +5,25 @@
   <!-- Ошибка -->
   <app-error-message *ngIf="!isLoading && error" [message]="error"></app-error-message>
 
-  <!-- Форма для отзыва -->
-  <div *ngIf="!isLoading && orderId" class="review-form">
-    <textarea
-      [(ngModel)]="review"
-      placeholder="Напишите ваш отзыв..."
-      rows="5"
-      class="review-textarea"
-    ></textarea>
-    <button
-      class="submit-review-button"
-      (click)="submitReview()"
-      [disabled]="isLoading || !review"
-    >
-      Отправить отзыв
-    </button>
+  <!-- Отзывы пользователя с информацией о заказах -->
+  <div *ngIf="!isLoading && reviews.length > 0">
+    <h3 class="tab-title">Ваши отзывы</h3>
+
+    <div *ngFor="let rev of reviews" class="review-card">
+      <div class="review-header">
+        <strong>Отзыв:</strong>
+      </div>
+      <p>{{ rev.note }}</p>
+
+      <!-- Найдем соответствующий заказ для отзыва -->
+      <div *ngIf="orders.length > 0" class="order-info">
+        <p><strong>Номер заказа:</strong> {{ getOrderNumberById(rev.orderId) }}</p>
+        <p><strong>Адрес:</strong> {{ getOrderById(rev.orderId)?.address }}</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Отзывы (если они есть) -->
-  <div *ngIf="!isLoading && reviews.length > 0">
-    <h3>Ваши отзывы</h3>
-    <div *ngFor="let rev of reviews" class="review-card">
-      <p>{{ rev.note }}</p>
-    </div>
+  <div *ngIf="!isLoading && reviews.length === 0" class="no-reviews-message">
+    <p>У вас нет отзывов для отображения.</p>
   </div>
 </div>

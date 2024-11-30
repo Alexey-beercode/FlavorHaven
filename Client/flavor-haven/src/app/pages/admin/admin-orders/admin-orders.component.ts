@@ -4,11 +4,11 @@ import { UserService } from '../../../services/user.service';
 import { OrderStatusService } from '../../../services/order-status.service';
 import { OrderDTO } from '../../../models/dtos/order/order.dto';
 import { OrderStatusDTO } from '../../../models/dtos/order/order-status.dto';
-import { CommonModule } from '@angular/common';
-import { ErrorMessageComponent } from '../../../components/error-message/error-message.component';
-import { OrderReviewComponent } from './order-review/order-review.component';
-import { OrderItemsComponent } from './order-items/order-items.component';
-import { forkJoin, of, switchMap } from 'rxjs';
+import { UserDTO } from '../../../models/dtos/user/user.dto';
+import {switchMap, forkJoin, map} from 'rxjs';
+import {FormsModule} from '@angular/forms';
+import {ErrorMessageComponent} from '../../../components/error-message/error-message.component';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-admin-orders',
@@ -16,102 +16,80 @@ import { forkJoin, of, switchMap } from 'rxjs';
   styleUrls: ['./admin-orders.component.css'],
   standalone: true,
   imports: [
-    CommonModule,
+    FormsModule,
     ErrorMessageComponent,
-    OrderReviewComponent,
-    OrderItemsComponent,
-  ],
+    CommonModule
+  ]
 })
 export class AdminOrdersComponent implements OnInit {
   orders: (OrderDTO & { userName?: string })[] = [];
   statuses: OrderStatusDTO[] = [];
   isLoading: boolean = false;
-  error: string | null = null;
-
-  selectedOrderIdForReview: string | null = null;
-  selectedOrderIdForItems: string | null = null;
+  error: string = '';
 
   constructor(
     private orderService: OrderService,
     private userService: UserService,
-    private statusService: OrderStatusService
+    private orderStatusService: OrderStatusService
   ) {}
 
   ngOnInit(): void {
-    this.loadOrdersAndStatuses();
+    this.loadOrders();
+    this.loadStatuses();
   }
 
-  // Загрузка статусов и заказов по каждому статусу
-  loadOrdersAndStatuses(): void {
+  loadOrders(): void {
     this.isLoading = true;
-    this.error = null;
+    this.error = '';
 
-    this.statusService.getAllOrderStatuses().pipe(
-      switchMap((statuses) => {
-        this.statuses = statuses;
-
-        const orderRequests = statuses.map((status) =>
-          this.orderService.getOrdersByStatus(status.id)
-        );
-
-        // Выполнить все запросы на заказы по статусам
-        return forkJoin(orderRequests);
-      })
-    ).subscribe({
-      next: (ordersByStatus) => {
-        const combinedOrders = ordersByStatus.flat();
-
-
-        const userRequests = combinedOrders.map((order) =>
+    this.orderService.getAll().pipe(
+      switchMap((orders: OrderDTO[]) => {
+        const userRequests = orders.map((order) =>
           this.userService.getUserById(order.userId)
         );
-
-        // Загрузить пользователей для всех заказов
-        forkJoin(userRequests).subscribe({
-          next: (users) => {
-            this.orders = combinedOrders.map((order, index) => ({
+        return forkJoin(userRequests).pipe(
+          map((users) => {
+            return orders.map((order, index) => ({
               ...order,
               userName: users[index]?.userName || 'Неизвестный пользователь',
             }));
-            this.isLoading = false;
-          },
-          error: (err) => {
-            console.error('Ошибка при загрузке пользователей:', err);
-            this.error = 'Не удалось загрузить данные пользователей.';
-            this.isLoading = false;
-          },
-        });
+          })
+        );
+      })
+    ).subscribe({
+      next: (orders) => {
+        this.orders = orders;
+        this.isLoading = false;
       },
       error: (err) => {
-        console.error('Ошибка при загрузке статусов или заказов:', err);
-        this.error = 'Не удалось загрузить данные заказов и статусов.';
+        console.error('Ошибка при загрузке заказов:', err);
+        this.error = 'Не удалось загрузить заказы.';
         this.isLoading = false;
       },
     });
   }
 
-  // Изменение статуса заказа
+  loadStatuses(): void {
+    this.orderStatusService.getAllOrderStatuses().subscribe({
+      next: (statuses: OrderStatusDTO[]) => {
+        this.statuses = statuses;
+      },
+      error: (err) => {
+        console.error('Ошибка при загрузке статусов:', err);
+        this.error = 'Не удалось загрузить статусы.';
+      },
+    });
+  }
+
   updateStatus(orderId: string, statusId: string): void {
     this.orderService.updateOrderStatus(orderId, { statusId }).subscribe({
       next: () => {
-        this.loadOrdersAndStatuses(); // Перезагрузка данных
+        this.loadOrders(); // Обновить заказы после изменения статуса
       },
       error: (err) => {
         console.error('Ошибка при обновлении статуса заказа:', err);
         this.error = 'Не удалось обновить статус заказа.';
       },
     });
-  }
-
-  // Открытие/скрытие списка блюд
-  viewItems(orderId: string): void {
-    this.selectedOrderIdForItems =
-      this.selectedOrderIdForItems === orderId ? null : orderId;
-  }
-
-  // Открытие/скрытие отзыва
-  viewReview(orderId: string): void {
-    this.selectedOrderIdForReview =
-      this.selectedOrderIdForReview === orderId ? null : orderId;
   }
 }

@@ -1,0 +1,36 @@
+<div class="admin-reviews-container">
+  <!-- Ошибка -->
+  <app-error-message *ngIf="error" [message]="error"></app-error-message>
+
+  <!-- Загрузка -->
+  <p *ngIf="isLoading">Загрузка отзывов...</p>
+
+  <!-- Таблица отзывов -->
+  <table *ngIf="!isLoading && orders.length" class="reviews-table">
+    <thead>
+    <tr>
+      <th>Номер заказа</th>
+      <th>Отзыв</th>
+      <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order?.orderNumber }}</td>
+      <td>{{ getReviewForOrder(order.id)?.note || 'Нет отзыва' }}</td>
+      <td>
+        <button
+          *ngIf="getReviewForOrder(order.id)"
+          class="delete-button"
+          (click)="deleteReview(getReviewForOrder(order.id)?.id || '')"
+        >
+          Удалить отзыв
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Сообщение об отсутствии заказов -->
+  <p *ngIf="!isLoading && !orders.length">Заказы отсутствуют.</p>
+</div>

@@ -1,83 +1,87 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ReviewService } from '../../../../services/review.service';
 import { ReviewDTO } from '../../../../models/dtos/review/review.dto';
-import { CreateReviewRequestDTO } from '../../../../models/dtos/review/create-review-request.dto';
+import { OrderService } from '../../../../services/order.service';
+import { OrderDTO } from '../../../../models/dtos/order/order.dto';
 import { CommonModule } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../../../components/loading-spinner/loading-spinner.component';
 import { ErrorMessageComponent } from '../../../../components/error-message/error-message.component';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reviews-tab',
   templateUrl: './reviews-tab.component.html',
   styleUrls: ['./reviews-tab.component.css'],
   standalone: true,
-  imports: [CommonModule, LoadingSpinnerComponent, ErrorMessageComponent, FormsModule],
+  imports: [CommonModule, LoadingSpinnerComponent, ErrorMessageComponent],
 })
 export class ReviewsTabComponent implements OnInit {
   @Input() userId: string | null = ''; // ID пользователя
-  @Input() orderId: string | null = ''; // ID заказа для отзыва
 
-  review: string = ''; // Текст отзыва
   reviews: ReviewDTO[] = []; // Список отзывов
+  orders: OrderDTO[] = []; // Список заказов пользователя
   isLoading: boolean = false; // Состояние загрузки
   error: string | null = null; // Сообщение об ошибке
 
-  constructor(private reviewService: ReviewService) {}
+  constructor(
+    private reviewService: ReviewService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit(): void {
-    // Если передан orderId, то возможно это запрос для создания нового отзыва
-    if (this.orderId) {
-      this.loadExistingReview(); // Загрузка существующего отзыва по заказу (если он есть)
+    if (this.userId) {
+      this.loadUserReviews(); // Загрузка отзывов пользователя
+      this.loadUserOrders();  // Загрузка заказов пользователя
     }
   }
 
-  // Загрузка текущего отзыва по заказу (если он существует)
-  loadExistingReview(): void {
-    if (!this.orderId) {
+  // Загрузка отзывов для текущего пользователя
+  loadUserReviews(): void {
+    if (!this.userId) {
       return;
     }
 
     this.isLoading = true;
-    this.reviewService.getReviewByOrderId(this.orderId).subscribe({
-      next: (review) => {
-        if (review) {
-          this.review = review.note; // Загружаем существующий отзыв
-        }
+    this.reviewService.getReviewsByUserId(this.userId).subscribe({
+      next: (reviews) => {
+        this.reviews = reviews; // Сохраняем только отзывы этого пользователя
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Ошибка загрузки отзыва:', err);
+        console.error('Ошибка загрузки отзывов:', err);
         this.isLoading = false;
-        this.error = 'Не удалось загрузить отзыв.';
+        this.error = 'Не удалось загрузить отзывы.';
       },
     });
   }
 
-  // Отправка нового отзыва
-  submitReview(): void {
-    if (!this.orderId || !this.review) {
-      this.error = 'Отзыв не может быть пустым';
+  // Загрузка заказов для текущего пользователя
+  loadUserOrders(): void {
+    if (!this.userId) {
       return;
     }
 
     this.isLoading = true;
-    const reviewRequest: CreateReviewRequestDTO = {
-      orderId: this.orderId,
-      note: this.review,
-    };
-
-    this.reviewService.createReview(reviewRequest).subscribe({
-      next: () => {
+    this.orderService.getOrdersByUserId(this.userId).subscribe({
+      next: (orders) => {
+        this.orders = orders; // Сохраняем заказы пользователя
         this.isLoading = false;
-        this.review = ''; // Очистить поле отзыва после отправки
-        // Можем добавить логику для успешной отправки, например, возврат на предыдущую вкладку
       },
       error: (err) => {
-        console.error('Ошибка отправки отзыва:', err);
+        console.error('Ошибка загрузки заказов:', err);
         this.isLoading = false;
-        this.error = 'Не удалось отправить отзыв.';
+        this.error = 'Не удалось загрузить заказы.';
       },
     });
   }
+  // Функция для получения номера заказа по orderId
+  getOrderNumberById(orderId: string): string | undefined {
+    const order = this.orders.find((order) => order.id === orderId);
+    return order ? order.orderNumber : 'Не найден';
+  }
+
+// Функция для получения заказа по orderId (если нужно выводить больше информации)
+  getOrderById(orderId: string): OrderDTO | undefined {
+    return this.orders.find((order) => order.id === orderId);
+  }
+
 }

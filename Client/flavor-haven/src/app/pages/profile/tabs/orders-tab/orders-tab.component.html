@@ -37,9 +37,9 @@
 
       <!-- Кнопка оставить отзыв (только для завершенных заказов) -->
       <button
-        *ngIf="order.status.name === 'Завершён'"
+        *ngIf="order.status.name === 'Completed'"
         class="pay-button"
-        (click)="writeReview(order.id)"
+        (click)="openReviewModal(order.id)"
       >
         Оставить отзыв
       </button>
@@ -60,4 +60,14 @@
   <p *ngIf="!isLoading && orders.length === 0" class="empty-message">
     У вас пока нет заказов.
   </p>
+
+  <!-- Модальное окно для отзыва -->
+  <div class="modal" *ngIf="isReviewModalOpen">
+    <div class="modal-content">
+      <h2>Оставить отзыв</h2>
+      <textarea [(ngModel)]="reviewNote" rows="5" placeholder="Напишите ваш отзыв..."></textarea>
+      <button (click)="submitReview()">Отправить</button>
+      <button (click)="closeReviewModal()">Закрыть</button>
+    </div>
+  </div>
 </div>

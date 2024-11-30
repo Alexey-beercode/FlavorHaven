@@ -1,8 +1,8 @@
 <div class="admin-orders-container">
-  <!-- Ошибка -->
+  <!-- Сообщение об ошибке -->
   <app-error-message *ngIf="error" [message]="error"></app-error-message>
 
-  <!-- Загрузка -->
+  <!-- Сообщение о загрузке -->
   <p *ngIf="isLoading">Загрузка заказов...</p>
 
   <!-- Таблица заказов -->
@@ -13,7 +13,7 @@
       <th>Пользователь</th>
       <th>Сумма</th>
       <th>Статус</th>
-      <th>Действия</th>
+      <th>Изменить статус</th>
     </tr>
     </thead>
     <tbody>
@@ -21,41 +21,23 @@
       <td>{{ order?.orderNumber }}</td>
       <td>{{ order?.userName }}</td>
       <td>{{ order?.amount }} руб</td>
+      <td>{{ order?.status?.name }}</td>
       <td>
+        <!-- Выпадающий список для выбора нового статуса -->
         <select
-          #statusSelect
-          [value]="order?.status?.id || ''"
-          (change)="updateStatus(order?.id || '', statusSelect.value)"
+          *ngIf="statuses?.length"
+          [(ngModel)]="order.status.id"
+          (ngModelChange)="updateStatus(order.id, order.status.id)"
         >
-          <option *ngFor="let status of statuses" [value]="status?.id">
-            {{ status?.name }}
+          <option *ngFor="let status of statuses" [value]="status.id">
+            {{ status.name }}
           </option>
         </select>
-      </td>
-      <td>
-        <button class="action-button" (click)="viewItems(order?.id || '')">
-          {{ selectedOrderIdForItems === order?.id ? 'Скрыть блюда' : 'Блюда' }}
-        </button>
-        <button class="action-button" (click)="viewReview(order?.id || '')">
-          {{ selectedOrderIdForReview === order?.id ? 'Скрыть отзыв' : 'Отзыв' }}
-        </button>
-      </td>
-    </tr>
-    <!-- Отображение блюд -->
-    <tr *ngIf="selectedOrderIdForItems">
-      <td colspan="5">
-        <app-order-items [orderId]="selectedOrderIdForItems"></app-order-items>
-      </td>
-    </tr>
-    <!-- Отображение отзыва -->
-    <tr *ngIf="selectedOrderIdForReview">
-      <td colspan="5">
-        <app-order-review [orderId]="selectedOrderIdForReview"></app-order-review>
       </td>
     </tr>
     </tbody>
   </table>
 
-  <!-- Сообщение об отсутствии заказов -->
+  <!-- Сообщение при отсутствии заказов -->
   <p *ngIf="!isLoading && !orders?.length">Заказы отсутствуют.</p>
 </div>

@@ -3,6 +3,7 @@ using FlavorHaven.Application.Models.DTOs;
 using FlavorHaven.Application.UseCases.Order.CreateOrderFromCart;
 using FlavorHaven.Application.UseCases.Order.DeleteOrder;
 using FlavorHaven.Application.UseCases.Order.GetOrderById;
+using FlavorHaven.Application.UseCases.Order.GetOrders;
 using FlavorHaven.Application.UseCases.Order.GetOrdersByStatus;
 using FlavorHaven.Application.UseCases.Order.GetOrdersByUserId;
 using FlavorHaven.Application.UseCases.Order.UpdateOrderStatus;
@@ -46,5 +47,13 @@ public class OrderController : ControllerBase
         await _mediator.Send(command, cancellationToken);
         
         return NoContent();
+    }
+
+    [HttpGet("getAll")]
+    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        var query = new GetOrdersUseCase();
+        var result = await _mediator.Send(query, cancellationToken);
+        return Ok(result);
     }
 }

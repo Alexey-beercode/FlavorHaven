@@ -40,6 +40,10 @@ export class OrderService {
     return this.http.delete<void>(`${this.baseUrl}${this.orderUrls.delete}/${orderId}`);
   }
 
+  getAll():Observable<OrderDTO[]> {
+    return this.http.get<OrderDTO[]>(`${this.baseUrl}${this.orderUrls.getAll}`);
+  }
+
   // Обновить статус заказа
   updateOrderStatus(orderId: string, request: UpdateOrderRequestDTO): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}${this.orderUrls.updateStatus}/${orderId}`, request);

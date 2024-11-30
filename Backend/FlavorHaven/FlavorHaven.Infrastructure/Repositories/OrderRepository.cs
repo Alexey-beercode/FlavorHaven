@@ -14,6 +14,16 @@ public class OrderRepository : BaseRepository<Order>, IOrderRepository
         _dbContext = dbContext;
     }
 
+    public async Task<IEnumerable<Order>> GetAllWithIncludesAsync(CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Orders
+            .Where(order => !order.IsDeleted)
+            .Include(order => order.Status)
+            .Include(order => order.OrderItems)
+            .ThenInclude(item => item.Dish)
+            .ThenInclude(item=>item.Category)
+            .ToListAsync(cancellationToken);
+    }
     public async Task<IEnumerable<Order>> GetByUserId(Guid id, CancellationToken cancellationToken = default)
     {
         return await _dbContext.Orders

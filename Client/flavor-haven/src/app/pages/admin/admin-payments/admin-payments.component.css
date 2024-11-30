@@ -2,41 +2,76 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
-  background: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9; /* Цвет фона */
+  border-radius: 16px; /* Радиус скругления */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень вокруг контейнера */
 }
 
 .payments-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .payments-table th,
 .payments-table td {
-  text-align: left;
   padding: 12px;
-  border-bottom: 1px solid #ddd;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
 }
 
 .payments-table th {
-  background: linear-gradient(to right, #007bff, #0056b3);
-  color: #ffffff;
+  background: linear-gradient(to right, #007bff, #0056b3); /* Градиент для заголовка */
+  color: #fff;
+  font-weight: bold;
+}
+
+.payments-table tr:nth-child(even) {
+  background: #f9f9f9; /* Чередующиеся строки */
+}
+
+.payments-table td {
+  border-bottom: 1px solid #ddd;
 }
 
 .no-data-message {
   text-align: center;
   font-size: 16px;
-  color: #555;
+  color: #555; /* Цвет текста при отсутствии данных */
+  margin-top: 20px;
 }
 
 .error-message {
-  color: #d9534f;
+  color: #d9534f; /* Красный цвет для ошибок */
   font-size: 14px;
+  margin-top: 20px;
 }
 
 .loading-message {
-  color: #333;
+  color: #333; /* Темный цвет для сообщений о загрузке */
   font-size: 16px;
+  margin-top: 20px;
+}
+
+/* Кнопка добавления */
+.add-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background: linear-gradient(to right, #ff5733, #ffc300); /* Градиент для кнопки */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.add-button:hover {
+  transform: scale(1.05); /* Эффект увеличения при наведении */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
