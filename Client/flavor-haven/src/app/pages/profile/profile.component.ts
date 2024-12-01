@@ -9,6 +9,7 @@ import { TokenService } from '../../services/token.service';
 import {AuthService} from '../../services/auth.service';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +31,7 @@ export class ProfileComponent implements OnInit {
   userId: string | null = ''; // ID пользователя
   orderId: string | null = '';
 
-  constructor(private tokenService: TokenService, private authService:AuthService) {}
+  constructor(private tokenService: TokenService, private authService:AuthService,private router:Router) {}
 
   ngOnInit(): void {
     this.loadUserId();
@@ -59,7 +60,7 @@ export class ProfileComponent implements OnInit {
     this.authService.revoke(this.userId).subscribe({
       next: () => {
         this.authService.logout(); // Удаляет токены
-        window.location.href = '/login'; // Перенаправляем на страницу логина
+        this.router.navigate(['/'])// ; // Перенаправляем на страницу логина
       },
       error: (err) => {
         console.error('Ошибка при выходе:', err);
