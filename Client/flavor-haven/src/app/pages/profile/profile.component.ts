@@ -60,12 +60,12 @@ export class ProfileComponent implements OnInit {
     this.authService.revoke(this.userId).subscribe({
       next: () => {
         this.authService.logout(); // Удаляет токены
-        this.router.navigate(['/'])// ; // Перенаправляем на страницу логина
+        this.router.navigate(['/']);// ; // Перенаправляем на страницу логина
       },
       error: (err) => {
         console.error('Ошибка при выходе:', err);
         this.authService.logout(); // Все равно очищаем токены
-        window.location.href = '/login'; // Перенаправляем на страницу логина
+        this.router.navigate(['/']); // Перенаправляем на страницу логина
       },
     });
   }
