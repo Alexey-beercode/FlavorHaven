@@ -11,6 +11,7 @@
     <tr>
       <th>Номер заказа</th>
       <th>Пользователь</th>
+      <th>Блюда</th>
       <th>Сумма</th>
       <th>Статус</th>
       <th>Изменить статус</th>
@@ -20,6 +21,7 @@
     <tr *ngFor="let order of orders">
       <td>{{ order?.orderNumber }}</td>
       <td>{{ order?.userName }}</td>
+      <td *ngFor="let dish of order.orderItems">- {{dish.dish.name}}<br></td>
       <td>{{ order?.amount }} руб</td>
       <td>{{ order?.status?.name }}</td>
       <td>
