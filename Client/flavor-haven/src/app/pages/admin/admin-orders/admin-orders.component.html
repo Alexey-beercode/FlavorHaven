@@ -21,11 +21,14 @@
     <tr *ngFor="let order of orders">
       <td>{{ order?.orderNumber }}</td>
       <td>{{ order?.userName }}</td>
-      <td *ngFor="let dish of order.orderItems">
-        <div style="display: block;">
-          - {{dish.dish.name}} ({{dish.count}})
-        </div>
+      <td>
+        <ul>
+          <li *ngFor="let dish of order.orderItems">
+            - {{dish.dish.name}} ({{dish.count}})
+          </li>
+        </ul>
       </td>
+
 
       <td>{{ order?.amount }} руб</td>
       <td>{{ order?.status?.name }}</td>
