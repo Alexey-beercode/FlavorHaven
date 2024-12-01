@@ -3,6 +3,8 @@ import SwiftUI
 struct CartView: View {
     @StateObject private var viewModel = CartViewModel()
     @State private var showConfirmation = false
+    @State private var isOrdered: Bool = false
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         VStack {
@@ -113,7 +115,7 @@ struct CartView: View {
                     Text("Итого:")
                         .font(.headline)
                     Spacer()
-                    Text("\(viewModel.totalPrice(), specifier: "%.2f") ₽")
+                    Text("\(viewModel.totalPrice(), specifier: "%.2f") BYN")
                         .font(.headline)
                         .foregroundColor(.orange)
                 }
@@ -152,7 +154,12 @@ struct CartView: View {
         .fullScreenCover(isPresented: $showConfirmation) {
             let order = Order(amount: viewModel.totalPrice(), address: "", comment: "")
             let viewOrderModel = CheckoutViewModel(order: order)
-            CheckoutView(viewModel: viewOrderModel)
+            CheckoutView(viewModel: viewOrderModel, isOrdered: $isOrdered)
+        }
+        .onChange(of: isOrdered) { newValue in
+            if newValue {
+                dismiss()
+            }
         }
     }
 }

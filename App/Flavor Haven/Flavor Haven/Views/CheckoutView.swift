@@ -6,6 +6,7 @@ struct CheckoutView: View {
     @State private var alertTitle = "Успешно!"
     @State private var alertMessage = "Ваш заказ оформлен."
     @State private var showAlert = false
+    @Binding var isOrdered: Bool
     
     var body: some View {
         VStack(spacing: 20) {
@@ -45,7 +46,6 @@ struct CheckoutView: View {
 
                 Button(action: {
                     viewModel.getBalance()
-                    
                     if let balance = Double(viewModel.balance) {
                         if viewModel.order.address.isEmpty {
                             alertTitle = "Внимание!"
@@ -56,6 +56,7 @@ struct CheckoutView: View {
                             alertMessage = "У вас недостаточно денег на балансе."
                             showAlert = true
                         } else {
+                            isOrdered = true
                             viewModel.submitOrder()
                             alertTitle = "Успешно!"
                             alertMessage = "Ваш заказ оформлен."
@@ -85,10 +86,4 @@ struct CheckoutView: View {
                 )
             }
     }
-}
-
-#Preview {
-    let order = Order(amount: 100, address: "", comment: "")
-    let viewModel = CheckoutViewModel(order: order)
-    return CheckoutView(viewModel: viewModel)
 }

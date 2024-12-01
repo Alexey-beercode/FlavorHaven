@@ -8,6 +8,7 @@ class CheckoutViewModel: ObservableObject {
     
     init(order: Order) {
         self.order = order
+        getBalance()
     }
     
     func submitOrder() {

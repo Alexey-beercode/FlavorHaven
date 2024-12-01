@@ -5,7 +5,7 @@ struct UserResponse: Codable {
     let id: String
     let userName: String
     let email: String
-    let balance: Int
+    let balance: Double
 }
 
 class UserService {

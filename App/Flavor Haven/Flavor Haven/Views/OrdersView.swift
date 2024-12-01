@@ -43,7 +43,7 @@ struct OrdersView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        dismiss() // Закрытие текущего экрана
+                        dismiss()
                     }) {
                         HStack {
                             Image(systemName: "chevron.backward")
